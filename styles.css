@@ -24,7 +24,7 @@ body {
 }
 
 .logo img {
-  width: 120px;
+  width: 134px;
   height: auto;
 }
 
@@ -225,7 +225,7 @@ body {
 
 .card {
   position: relative;
-  width: 300px;
+  width: 450px;
 }
 
 .desconto {
@@ -306,7 +306,6 @@ body {
 
 .vermais:hover{
   box-shadow: 0 0 10px #1dd70c44;
-
 }
 
 .icone-mais {
@@ -325,9 +324,10 @@ body {
 
 
 .container-lancamentos h2 {
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 130px;
   margin-left: 10%;
+  text-decoration: underline;
 }
 
 .cards-lancamentos {
@@ -341,7 +341,7 @@ body {
   background-color: #1c262f;
   border-radius: 8px;
   overflow: hidden;
-  width: 280px;
+  width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -362,7 +362,7 @@ body {
 
 .info-jogo p {
   color: white;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 500;
  margin-top: 15px;
  margin-left: 5px;
@@ -376,10 +376,9 @@ body {
   padding: 0 10px;
 }
 
-
 .icone-carrinho {
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   background-color: #1DD70C;
   padding: 6px;
   border-radius: 50%;
@@ -423,7 +422,6 @@ body {
   width: 4px;
   height: 65px;
   background-color: white;
-
 }
 
 .footer-info {
