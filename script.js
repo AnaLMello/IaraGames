@@ -1,27 +1,45 @@
-let fontSize = 21;
-const body = document.body;
+document.getElementById('signupForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  let isValid = true;
+  const form = event.target;
+  
+  form.querySelectorAll('input').forEach(input => {
+    input.classList.remove('is-invalid');
+    
+    if (!input.value) {
+      input.classList.add('is-invalid');
+      isValid = false;
+    } else if (input.name === 'email' && !input.value.includes('@')) {
+      input.classList.add('is-invalid');
+      isValid = false;
+    } else if (input.name === 'senha' && input.value.length !== 8) {
+      input.classList.add('is-invalid');
+      isValid = false;
+    }
+  });
 
-document.getElementById("aumentar-fonte").addEventListener("click", () => {
-  fontSize += 2;
-  body.style.fontSize = `${fontSize}px`;
-});
-
-document.getElementById("diminuir-fonte").addEventListener("click", () => {
-  if (fontSize > 12) {
-    fontSize -= 2;
-    body.style.fontSize = `${fontSize}px`;
-  }
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  const loginButton = document.getElementById("loginButton");
-
-  if (loginButton) {
-    loginButton.addEventListener("click", function () {
-      window.location.href = "login.html";
-    });
+  if (isValid) {
+    alert('Cadastro enviado com sucesso!');
   } else {
-    console.log("Botão não encontrado");
+    alert('Por favor, preencha corretamente todos os campos.');
   }
 });
+
+function fazerLogin() {
+  alert('Redirecionando para a tela de login...');
+}
+
+function toggleSenha() {
+  const senhaInput = document.querySelector('input[name="senha"]');
+  const eyeIcon = document.getElementById('eyeIcon');
+  
+  if (senhaInput.type === 'password') {
+    senhaInput.type = 'text';
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
+  } else {
+    senhaInput.type = 'password';
+    eyeIcon.classList.remove('fa-eye-slash');
+    eyeIcon.classList.add('fa-eye');
+  }
+}
