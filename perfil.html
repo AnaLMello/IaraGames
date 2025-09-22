@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Iara Games</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #00030F;
+            color: white;
+            font-family: 'Inria Sans', sans-serif;
+        }
+        
+        .profile-header {
+            background: transparent;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-bottom: none;
+        }
+        
+        .profile-avatar-large {
+            color: #63c9bb;
+            background: transparent;
+            border-radius: 50%;
+            padding: 15px;
+            border: none;
+        }
+        
+        .profile-avatar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .profile-name-highlight {
+            color: #63c9bb !important;
+            font-weight: bold;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .profile-card {
+            background: #1a2332;
+            border: 1px solid #468E89;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px;
+        }
+        
+        .profile-card h5 {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .profile-card ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .profile-card li {
+            margin-bottom: 4px;
+        }
+        
+        .profile-card a {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #8892b0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .profile-card a:hover {
+            background-color: rgba(99, 201, 187, 0.1);
+            color: #ffffff;
+        }
+        
+        .profile-card a span {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        .profile-card a svg {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .profile-form .form-control {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: white !important;
+            border-radius: 8px;
+        }
+        
+        .profile-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+        
+        .profile-form .form-control:focus {
+            background: #2a2a2a;
+            border-color: #63C9BB;
+            color: white !important;
+            box-shadow: 0 0 0 0.2rem rgba(99, 201, 187, 0.25);
+        }
+        
+        .btn-save {
+            background: #00ff88;
+            color: black;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .btn-save:hover {
+            background: #00cc6a;
+            color: black;
+        }
+        
+        .expertise-tag {
+            display: inline-block;
+            background: #0f766e;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 14px;
+        }
+        
+        .stats-card {
+            background: #63C9BB;
+            color: black;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .review-item {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stars {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg mt-3 ms-5 me-md-5">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <img src="./img/IaraLogo.png" alt="Logo" class="me-2 logo-topo" style="height: 80px;">
+                <div class="logo-text d-flex flex-column text-white">
+                    <span style="font-size: 27px;" class="iara-logo fw-bold">Iara</span>
+                    <span style="font-size: 27px;" class="fw-bold">Games</span>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <div class="d-flex align-items-center gap-4">
+                <ul class="navbar-nav d-flex flex-row align-items-center gap-4">
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">COMUNIDADE</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">JOGOS</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">ACESSIBILIDADE</a></li>
+                    <li class="nav-item">
+                        <div class="carrinho-container">
+                <svg class="carrinho-icone" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                    <path d="M7 18C5.9 18 5 18.9 5 20S5.9 22 7 22 9 21.1 9 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.24 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2M17 18C15.9 18 15 18.9 15 20S15.9 22 17 22 19 21.1 19 20 18.1 18 17 18Z"/>
+                </svg>
+            </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <div class="profile-avatar-container">
+                        <svg width="80" height="80" fill="currentColor" viewBox="0 0 16 16" class="profile-avatar-large">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <h1 id="profileHeaderName" class="mb-2 profile-name-highlight">Carregando...</h1>
+                    <p id="profileHeaderEmail" class="mb-0 opacity-75">Carregando...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="profile-card">
+                    <h5 class="mb-3">Menu do Perfil</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="perfil.html" class="text-decoration-none text-white d-flex align-items-center p-2 rounded" 
+                               style="background: rgba(99, 201, 187, 0.2);">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                </svg> Meu Perfil
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="minhas-compras.html" class="text-decoration-none text-white d-flex align-items-center p-2 rounded hover-bg">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                </svg> Minhas Compras
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-decoration-none text-white d-flex align-items-center p-2 rounded hover-bg">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.292-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.292c.415.764-.42 1.6-1.185 1.184l-.292-.159a1.873 1.873 0 0 0-2.692 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.693-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.292A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                                </svg> Configurações
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Profile Form -->
+                    <div class="col-lg-8">
+                        <div class="profile-card">
+                            <h3 class="mb-4">Informações Pessoais</h3>
+                            <form id="profileForm" class="profile-form">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="nome" class="form-label">Nome</label>
+                                        <input type="text" class="form-control" id="nome" placeholder="Seu nome" value="Lorena Morais">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="seu@email.com" value="lorena@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="whatsapp" class="form-label">WhatsApp</label>
+                                    <input type="tel" class="form-control" id="whatsapp" placeholder="+55 11 99999-9999" value="+55 11 98765-4321">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="sobre" class="form-label">Sobre você</label>
+                                    <textarea class="form-control" id="sobre" rows="4" 
+                                              placeholder="Conte um pouco sobre você...">Apaixonada por jogos indie brasileiros e sempre em busca de novas aventuras digitais. Gosto especialmente de jogos com narrativas envolventes e elementos da cultura nacional.</textarea>
+                                </div>
+                                <button type="button" class="btn btn-save" onclick="salvarPerfil()">
+                                    Salvar Alterações
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Stats Card -->
+                    <div class="col-lg-4">
+                        <div class="stats-card mb-4">
+                            <h4 class="mb-3">Detalhes do Jogador</h4>
+                            
+                            <div class="mb-3">
+                                <h6>Expertise</h6>
+                                <div id="expertiseTags">
+                                    <span class="expertise-tag">RPG</span>
+                                    <span class="expertise-tag">Indie</span>
+                                    <span class="expertise-tag">Aventura</span>
+                                    <span class="expertise-tag">Narrativa</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <h6>Experiência</h6>
+                                <p id="experiencia" class="mb-0">5 anos jogando</p>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <h6>Avaliação</h6>
+                                <p id="avaliacao" class="mb-0">
+                                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Reviews -->
+                        <div class="profile-card">
+                            <h5 class="mb-3">Reviews Recentes</h5>
+                            <div id="reviewsList">
+                                <div class="review-item mb-3 p-3 rounded">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h6 class="mb-0 text-white">Bacuri</h6>
+                                        <span class="text-warning">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="mb-0 small text-white">"Jogo incrível! A narrativa brasileira é envolvente e os gráficos são lindos. Recomendo muito!"</p>
+                                    <small class="text-white opacity-75">Há 2 dias</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="api-simulator.js"></script>
+    <script src="data-service.js"></script>
+    <script src="profile-component.js"></script>
+    <script>
+        // Carregar dados do perfil
+        async function carregarDadosPerfil() {
+            try {
+                mostrarCarregamento(true);
+                
+                const response = await window.dataService.carregarUsuario();
+                
+                if (response.success && response.data) {
+                    const usuario = response.data;
+                    
+                    document.getElementById('nome').value = usuario.nome || '';
+                    document.getElementById('email').value = usuario.email || '';
+                    document.getElementById('whatsapp').value = usuario.whatsapp || '';
+                    document.getElementById('sobre').value = usuario.sobre || '';
+                    
+                    document.getElementById('profileHeaderName').textContent = usuario.nome || 'Usuário';
+                    document.getElementById('profileHeaderEmail').textContent = usuario.email || '';
+                    
+                    if (response.source === 'localStorage') {
+                        mostrarMensagem('Dados carregados do cache local.', 'info');
+                    }
+                    
+                    await carregarReviewsRecentes();
+                    
+                } else {
+                    throw new Error(response.error || 'Erro ao carregar dados');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar perfil:', error);
+                
+                document.getElementById('nome').value = 'Ana Silva';
+                document.getElementById('email').value = 'ana.silva@email.com';
+                document.getElementById('whatsapp').value = '+55 11 99999-1234';
+                document.getElementById('sobre').value = 'Apaixonada por jogos indie e narrativas envolventes.';
+                
+                document.getElementById('profileHeaderName').textContent = 'Ana Silva';
+                document.getElementById('profileHeaderEmail').textContent = 'ana.silva@email.com';
+                
+                mostrarMensagem('Erro ao carregar alguns dados. Usando informações em cache.', 'warning');
+            } finally {
+                mostrarCarregamento(false);
+            }
+        }
+        
+        // Carregar reviews recentes
+        async function carregarReviewsRecentes() {
+            try {
+                const response = await window.dataService.carregarReviewsUsuario();
+                
+                if (response.success && response.data.length > 0) {
+                    const reviewsContainer = document.querySelector('.reviews-recentes .row');
+                    if (reviewsContainer) {
+                        const review = response.data[0];
+                        
+                        reviewsContainer.innerHTML = `
+                            <div class="col-12">
+                                <div class="review-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="text-white mb-1">${review.jogo}</h6>
+                                            <div class="mb-2">
+                                                ${'⭐'.repeat(review.estrelas)}
+                                            </div>
+                                            <p class="text-white mb-1">${review.comentario}</p>
+                                            <small class="text-white opacity-75">Há ${calcularTempoDecorrido(review.data)}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar reviews:', error);
+            }
+        }
+        
+        // Função auxiliar para calcular tempo decorrido
+        function calcularTempoDecorrido(dataReview) {
+            const hoje = new Date();
+            const dataReviewObj = new Date(dataReview);
+            const diffTime = Math.abs(hoje - dataReviewObj);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return '1 dia';
+            if (diffDays < 7) return `${diffDays} dias`;
+            if (diffDays < 30) return `${Math.floor(diffDays / 7)} semana${Math.floor(diffDays / 7) > 1 ? 's' : ''}`;
+            return `${Math.floor(diffDays / 30)} mês${Math.floor(diffDays / 30) > 1 ? 'es' : ''}`;
+        }
+        
+        // Função para mostrar/esconder indicador de carregamento
+        function mostrarCarregamento(mostrar) {
+            let loadingElement = document.getElementById('loadingIndicator');
+            
+            if (mostrar && !loadingElement) {
+                loadingElement = document.createElement('div');
+                loadingElement.id = 'loadingIndicator';
+                loadingElement.className = 'position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center';
+                loadingElement.style.backgroundColor = 'rgba(0,0,0,0.7)';
+                loadingElement.style.zIndex = '9999';
+                loadingElement.innerHTML = `
+                    <div class="text-center text-white">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p>Carregando dados do perfil...</p>
+                    </div>
+                `;
+                document.body.appendChild(loadingElement);
+            } else if (!mostrar && loadingElement) {
+                loadingElement.remove();
+            }
+        }
+        
+        // Função para mostrar mensagens
+        function mostrarMensagem(texto, tipo = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${tipo} alert-dismissible fade show position-fixed`;
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '10000';
+            alertDiv.innerHTML = `
+                ${texto}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // Salvar perfil
+        async function salvarPerfil() {
+            try {
+                mostrarCarregamento(true);
+                
+                const dados = {
+                    nome: document.getElementById('nome').value,
+                    email: document.getElementById('email').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    sobre: document.getElementById('sobre').value
+                };
+                
+                const response = await window.dataService.atualizarUsuario(dados);
+                
+                if (response.success) {
+                    if (window.profileComponent) {
+                        window.profileComponent.updateUserData(dados);
+                    }
+                    
+                    mostrarMensagem('Perfil atualizado com sucesso!', 'success');
+                } else {
+                    throw new Error(response.error || 'Erro ao salvar perfil');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao salvar perfil:', error);
+                mostrarMensagem('Erro ao salvar perfil. Tente novamente.', 'danger');
+            } finally {
+                mostrarCarregamento(false);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarDadosPerfil();
+        });
+    </script>
+    </script>
+</body>
+</html>

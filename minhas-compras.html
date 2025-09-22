@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Compras - IaraGames</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="minhas-compras.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <div class="d-flex align-items-center ms-5">
+                <img src="./img/IaraLogo.png" alt="Logo" class="me-2 logo-topo" style="height: 80px;">
+                <div class="logo-text d-flex flex-column text-white">
+                    <span style="font-size: 27px;" class="iara-logo fw-bold">Iara</span>
+                    <span style="font-size: 27px;" class="fw-bold">Games</span>
+                </div>
+            </div>
+
+            <!-- Botão de toggle (mobile) -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-success"></span>
+            </button>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse d-lg-flex justify-content-end me-5 me-md-6" id="menuPrincipal">
+                <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-5 gap-md-3">
+                    <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="index.html">HOME</a></li>
+                    <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">COMUNIDADE</a></li>
+                    <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">JOGOS</a></li>
+                    <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">ACESSIBILIDADE</a></li>
+                    <li class="nav-item">
+                        <div class="carrinho-container">
+                            <svg class="carrinho-icone" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                <path d="M7 18C5.9 18 5 18.9 5 20S5.9 22 7 22 9 21.1 9 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.24 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2M17 18C15.9 18 15 18.9 15 20S15.9 22 17 22 19 21.1 19 20 18.1 18 17 18Z"/>
+                            </svg>
+                        </div>
+                    </li>
+                    <!-- Profile icon will be added here by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Sidebar -->
+            <div class="row">
+                <div class="col-md-3 sidebar">
+                    <div class="profile-card">
+                        <h5 class="mb-3">Menu do Perfil</h5>
+                        <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="perfil.html" class="text-decoration-none text-white d-flex align-items-center p-2 rounded hover-bg">
+                                <svg class="me-2" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                </svg> Meu Perfil
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="minhas-compras.html" class="text-decoration-none text-white d-flex align-items-center p-2 rounded" 
+                               style="background: rgba(99, 201, 187, 0.2);">
+                                <svg class="me-2" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                </svg> Minhas Compras
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-decoration-none text-white d-flex align-items-center p-2 rounded hover-bg">
+                                <svg class="me-2" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.292-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.292c.415.764-.42 1.6-1.185 1.184l-.292-.159a1.873 1.873 0 0 0-2.692 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.693-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.292A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                                </svg> Configurações
+                            </a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+                <!-- Content Area -->
+                <div class="col-md-9 content-area">
+                    <div class="purchases-container">
+                        <div class="purchases-header">
+                            <div class="search-container">
+                                <input type="text" class="search-input" placeholder="Pesquisar compra">
+                                <button class="search-button">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <path d="m21 21-4.35-4.35"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="purchases-table-container">
+                            <table class="purchases-table">
+                                <thead>
+                                    <tr>
+                                        <th>Imagem</th>
+                                        <th>Nome</th>
+                                        <th>Preço</th>
+                                        <th>Atualizado em</th>
+                                        <th>Avaliação em ★</th>
+                                        <th>Disponível</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="product-image">
+                                                <img src="img/2.png" alt="Produto 1">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">Horizon Chase</div>
+                                        </td>
+                                        <td>
+                                            <div class="sales-info">
+                                                <div class="sales-number">R$150,00</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-status">Há 1 minuto</div>
+                                        </td>
+                                        <td>
+                                            <div class="rating">Há 1 minuto</div>
+                                        </td>
+                                        <td>
+                                            <div class="purchase-time">Disponível</div>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-success">Disponível</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn-action btn-jogar">JOGAR</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-image">
+                                                <img src="img/3.png" alt="Produto 2">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">Horizon Chase</div>
+                                        </td>
+                                        <td>
+                                            <div class="sales-info">
+                                                <div class="sales-number">R$150,00</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-status">Há 30 minutos</div>
+                                        </td>
+                                        <td>
+                                            <div class="rating">Há 30 minutos</div>
+                                        </td>
+                                        <td>
+                                            <div class="purchase-time">Disponível</div>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-success">Disponível</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn-action btn-jogar">JOGAR</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-image">
+                                                <img src="img/4.png" alt="Produto 3">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">Chroma Squad</div>
+                                        </td>
+                                        <td>
+                                            <div class="sales-info">
+                                                <div class="sales-number">R$150,00</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-status">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="rating">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="purchase-time">Disponível</div>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-success">Disponível</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn-action btn-jogar">JOGAR</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-image">
+                                                <img src="img/5.png" alt="Produto 4">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">Scrolls Section</div>
+                                        </td>
+                                        <td>
+                                            <div class="sales-info">
+                                                <div class="sales-number">R$150,00</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-status">Há 1 semana</div>
+                                        </td>
+                                        <td>
+                                            <div class="rating">Há 1 semana</div>
+                                        </td>
+                                        <td>
+                                            <div class="purchase-time">Disponível</div>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-success">Disponível</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn-action btn-jogar">JOGAR</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-image">
+                                                <img src="img/6.png" alt="Produto 5">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">Mystic Quest</div>
+                                        </td>
+                                        <td>
+                                            <div class="sales-info">
+                                                <div class="sales-number">R$150,00</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-status">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="rating">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="purchase-time">Disponível</div>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-success">Disponível</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn-action btn-jogar">JOGAR</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-image">
+                                                <img src="img/7.png" alt="Produto 6">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">Kaze and the Wild Masks</div>
+                                        </td>
+                                        <td>
+                                            <div class="sales-info">
+                                                <div class="sales-number">R$250,00</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-status">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="rating">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="purchase-time">Disponível</div>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-success">Disponível</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn-action btn-jogar">JOGAR</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-image">
+                                                <img src="img/8.png" alt="Produto 7">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">Super Mombo Quest</div>
+                                        </td>
+                                        <td>
+                                            <div class="sales-info">
+                                                <div class="sales-number">R$150,00</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-status">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="rating">Há 1 dia</div>
+                                        </td>
+                                        <td>
+                                            <div class="purchase-time">Indisponível</div>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-pending">Expirado</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn-action btn-jogar disabled">JOGAR</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pagination-container">
+                            <div class="pagination-info">
+                                Mostrando 5 de 30
+                            </div>
+                            <div class="pagination-controls">
+                                <button class="pagination-btn">‹</button>
+                                <button class="pagination-btn active">1</button>
+                                <button class="pagination-btn">2</button>
+                                <button class="pagination-btn">3</button>
+                                <button class="pagination-btn">›</button>
+                                <button class="pagination-btn">››</button>
+                                <button class="pagination-btn last">1 ∨</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="profile-component.js"></script>
+</body>
+</html>

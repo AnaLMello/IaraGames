@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <title>Iara - Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
@@ -12,44 +16,266 @@
 </head>
 
 <body>
-  <div class="top-menu">
-    <img src="img/menu.png" alt="Menu" class="menu-icon">
-
-    <div class="logo">
-      <img src="img/IaraLogo.png" alt="Logo">
-      <div class="logo-text">
-        <span>Iara</span>
-        <span>Games</span>
-      </div>
-    </div>
-
-    <div class="menu-links">
-      <a href="#">SOBRE NÓS</a>
-      <a href="#">COMUNIDADE</a>
-      <a href="#">JOGOS</a>
-      <a href="#">SUPORTE</a>
-
-      <div class="actions">
-        <div class="download-icon">
-          <img src="img/download.png" alt="Download">
+ <!-- Header -->
+ <header>
+        <div class="bg-image"></div>
+    <nav class="navbar navbar-expand-lg mt-3 ms-5 me-md-5">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+    
+        <div class="d-flex align-items-center">
+        <img src="./img/IaraLogo.png" alt="Logo" class="me-2 logo-topo" style="height: 80px;">
+        <div class="logo-text d-flex flex-column text-white">
+        <span style="font-size: 27px;" class=" iara-logo fw-bold">Iara</span>
+        <span style="font-size: 27px;" class="fw-bold">Games</span>
         </div>
-        <button id="loginButton" class="loginButton">Login</button>
+    </div>
+
+    <button class="navbar-toggler d-lg-none " type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon text-success"></span>
+    </button>
+
+    <div class="collapse navbar-collapse d-lg-none justify-content-end mt-3 me-5 me-md-6 " id="menuPrincipal">
+        <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-5 gap-md-3">
+        <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">COMUNIDADE</a></li>
+        <li style="font-size: 21px;"class="nav-item"><a class="nav-link text-white" href="biblioteca.html">JOGOS</a></li>
+        <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">ACESSIBILIDADE</a></li>
+        <li class="nav-item">
+          <a href="cadastro.html"> 
+            <button id="loginButton" class="btn btn-outline-light">Entrar</button>
+            </a>
+        </li>
+        <li class="nav-item">
+            <div class="carrinho-container">
+                <svg class="carrinho-icone" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                    <path d="M7 18C5.9 18 5 18.9 5 20S5.9 22 7 22 9 21.1 9 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.24 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2M17 18C15.9 18 15 18.9 15 20S15.9 22 17 22 19 21.1 19 20 18.1 18 17 18Z"/>
+                </svg>
+            </div>
+        </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero container-fluid px-2 py-5">
+    <div class="row">
+    <div id="hero-conteudo" class="col-lg-6">
+        <h1 class="titulo-custom">Descubra os melhores jogos brasileiros</h1>
+        <p id="hero_subtitulo" class="mt-3 mb-4 subtitulo-custom ">
+        
+        </p>
+        <button class="btn btn-conhecer">CONHECER</button>
+        <button class="btn btn-explorar">EXPLORAR</button>
+        </div>
+    </div>
+</section>
+
+<!-- Jogos em Destaque -->
+<section class="jogos-destaque py-5">
+  <div class="container">
+    <div  class="row">
+      <div class="col-12">
+        <h2 class="titulo-destaque mb-1">JOGOS EM DESTAQUE</h2>
+        <p class="subtitulo-destaque mb-4">Os títulos mais jogados e aclamados pela comunidade</p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="carousel-jogos">
+          <div class="jogo-card">
+            <div class="jogo-imagem">
+              <img src="./img/3.png" alt="Horizon Chase Turbo" class="img-fluid">
+            </div>
+            <div class="jogo-info">
+              <h5 class="jogo-titulo">Horizon Chase</h5>
+              <p class="jogo-categoria">Corrida</p>
+              <div class="jogo-preco-carrinho">
+                <span class="jogo-preco">R$ 28,90</span>
+                <button class="btn-carrinho">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="m1 1 4 4 5.5 13h9.5l3-8H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="jogo-card">
+            <div class="jogo-imagem">
+              <img src="./img/jogo3.png" alt="Kaze and the Wild Masks" class="img-fluid">
+            </div>
+            <div class="jogo-info">
+              <h5 class="jogo-titulo">Kaze and the Wild Masks</h5>
+              <p class="jogo-categoria">Plataforma</p>
+              <div class="jogo-preco-carrinho">
+                <span class="jogo-preco">R$ 78,50</span>
+                <button class="btn-carrinho">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="m1 1 4 4 5.5 13h9.5l3-8H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="jogo-card">
+            <div class="jogo-imagem">
+              <img src="./img/4.png" alt="Chroma Squad" class="img-fluid">
+            </div>
+            <div class="jogo-info">
+              <h5 class="jogo-titulo">Chroma Squad</h5>
+              <p class="jogo-categoria">Estratégia</p>
+              <div class="jogo-preco-carrinho">
+                <span class="jogo-preco">R$ 178,90</span>
+                <button class="btn-carrinho">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="m1 1 4 4 5.5 13h9.5l3-8H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="jogo-card">
+            <div class="jogo-imagem">
+              <img src="./img/14.png" alt="Scrolls Section" class="img-fluid">
+            </div>
+            <div class="jogo-info">
+              <h5 class="jogo-titulo">Scrolls Section</h5>
+              <p class="jogo-categoria">RPG</p>
+              <div class="jogo-preco-carrinho">
+                <span class="jogo-preco">R$ 89,90</span>
+                <button class="btn-carrinho">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="m1 1 4 4 5.5 13h9.5l3-8H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="jogo-card">
+            <div class="jogo-imagem">
+              <img src="./img/15.png" alt="Mystic Quest" class="img-fluid">
+            </div>
+            <div class="jogo-info">
+              <h5 class="jogo-titulo">Mystic Quest</h5>
+              <p class="jogo-categoria">Aventura</p>
+              <div class="jogo-preco-carrinho">
+                <span class="jogo-preco">R$ 38,20</span>
+                <button class="btn-carrinho">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="m1 1 4 4 5.5 13h9.5l3-8H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-indicadores text-center mt-4">
+          <span class="indicador ativo"></span>
+          <span class="indicador"></span>
+          <span class="indicador"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Em Breve -->
+<section class="em_breve">
+<div class="container-fluid py-5 em-breve" >
+  <h2 style="padding-left: 5rem; padding-top: 25rem; font-size: 40px;" class="fw-bold em-breve-titulo">EM BREVE</h2>
+  <p style="padding-left: 5rem; font-size: 20px;" class="mb-4 text-white em-breve-titulo">Fique por dentro dos lançamentos que estão chegando para você!</p>
+
+  <div class="row">
+     <div class="col-lg-8 main-highlight">
+      <div class="game-card-em-breve-saci p-3">
+        <img src="img//saci pererê.png" alt="Saci Pererê" class="img-fluid rounded mb-3">
+        <h5 style="font-size: 32px; font-weight: bold;">Saci Pererê</h5>
+        <div class="mb-2 mt-4">
+          <span class="tag tag-acao">Ação</span>
+          <span class="tag tag-duo">duo</span>
+        </div>
+        <div class="box-prevenda" >
+        <p style="font-size: 20px; max-width: 700px;" class="text-white text-saci">Uma aventura encantadora pela mitologia brasileira, cheia de magia e diversão para todas as idades.</p>
+        <button class="btn btn-pre-venda">PRÉ-VENDA</button>
+        </div>
       </div>
     </div>
 
-    <div class="acessibilidade">
-      <button id="aumentar-fonte">+A</button> |
-      <button id="diminuir-fonte">A-</button>
+    <div class="col-lg-4 card-lateral">
+      <div class="d-flex game-card-em-breve mb-5 p-2">
+        <img src="./img/sumo hero.png" alt="Summon the Hero" class="thumbnail-hero me-2">
+        <div>
+          <h5 style="font-weight: bold;" class="mb-1">Summon the hero</h5>
+          <small class="text-white-50">Iara Studios<br>Lançamento: 2019</small>
+          <div class="mb-2 mt-4">
+          <span class="tag tag-acao">Ação</span>
+          <span class="tag tag-duo">duo</span>
+        </div>
+        </div>
+      </div>
 
+      <div class="d-flex game-card-em-breve mb-5 p-2">
+        <img src="./img/Rios.png" alt="Capa do jogo Rios" class="thumbnail-rios me-2">
+        <div>
+          <h5 style="font-weight: bold;" class="mb-1">Rios</h5>
+          <small class="text-white-50">Iara Studios<br>Lançamento: 2019</small>
+          <div>
+           <div class="mb-2 mt-4">
+          <span class="tag tag-acao">Ação</span>
+        </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex game-card-em-breve mb-5 p-2">
+        <img src="./img/brazilian legends.png" alt="Brazilian Legends" class="thumbnail-brazilian me-2">
+        <div>
+          <h5 style="font-weight: bold;" class="mb-1">Brazilian Legends</h5>
+          <small class="text-white-50">Iara Studios<br>Lançamento: 2019</small>
+          <div>
+           <div class="mb-2 mt-4">
+          <span class="tag tag-acao">Ação</span>
+          <span class="tag tag-18"> +18 anos</span>
+        </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex game-card-em-breve mb-3 p-2">
+        <img src="./img/curupira.png" alt="capa do jogo Curupira" class="thumbnail-curupira me-2">
+        <div>
+          <h5 style="font-weight: bold;" class="mb-1">Curupira</h5>
+          <small class="text-white-50">Iara Studios<br>Lançamento: 2019</small>
+          <div>
+           <div class="mb-2 mt-4">
+          <span class="tag tag-acao">Ação</span>
+        </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+</section>
 
-  <div class="banner-inicial">
-    <img src="img/bannerInicial.png" alt="Banner">
-  </div>
-
-
-  <div class="container-apresentacao">
+<!-- Apresentação -->
+<div class="container-apresentacao">
     <div class="texto-apresentacao">
       <h2>Conheça um pouco da história da Iara Games</h2>
       <p>
@@ -63,14 +289,13 @@
       <img src="img/IaraLogo.png" alt="Logo Iara Games" class="iara-logo">
       <img src="img/logoFiap.png" alt="Logo FIAP" class="fiap-logo">
     </div>
-  </div>
+</div>
 
-
-  <div class="promocoes">
+<!-- Promoções -->
+<div class="promocoes">
     <h2>PROMOÇÕES DO MÊS</h2>
     <div class="cards-container">
 
-      <!-- Card 1 -->
       <div class="card">
         <span class="desconto">70% OFF</span>
         <img class="thumb" src="img/superMomb.jpg" alt="Super Mombo Quest">
@@ -84,7 +309,6 @@
         </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="card">
         <span class="desconto">30% OFF</span>
         <img class="thumb" src="img/BemFeito.jpg" alt="Bem Feito">
@@ -98,7 +322,6 @@
         </div>
       </div>
 
-      <!-- Card 3 -->
       <div class="card">
         <span class="desconto">50% OFF</span>
         <img class="thumb" src="img/Bravery.jpg" alt="Bacuri">
@@ -112,8 +335,6 @@
         </div>
       </div>
 
-
-
     </div>
 
     <div class="container-botao">
@@ -122,11 +343,10 @@
         <img src="img/add.png" class="icone-mais">
       </button>
     </div>
+</div>
 
-  </div>
-
-
-  <div class="container-lancamentos">
+<!-- Lançamentos -->
+<div class="container-lancamentos">
     <h2>LANÇAMENTOS</h2>
 
     <div id="carouselJogos" class="carousel slide" data-bs-ride="carousel">
@@ -134,9 +354,9 @@
 
         <div class="carousel-item active text-center">
           <div class="card-jogo d-inline-block">
-            <img src="img/horizon_chase.jpg" alt="Horizon Chase" class="imagem-jogo" />
+            <img src="img/pocketBravery.jpg" alt="capa do jogo Pocket Bravery" class="imagem-jogo" />
             <div class="info-jogo">
-              <p>Horizon Chase</p>
+              <p>Pocket Bravery</p>
               <div class="preco-carrinho">
                 <span class="preco-novo">R$ 28,90</span>
                 <img src="img/bag.png" alt="Carrinho" class="icone-carrinho">
@@ -147,9 +367,9 @@
 
         <div class="carousel-item text-center">
           <div class="card-jogo d-inline-block">
-            <img src="img/kaze_and_the_wild_masks.png" alt="Kaze and the Wild Masks" class="imagem-jogo" />
+            <img src="img/Bacuri.jpg" alt="capa do jogo Bacuri" class="imagem-jogo" />
             <div class="info-jogo">
-              <p>Kaze and the Wild Masks</p>
+              <p>Bacuri</p>
               <div class="preco-carrinho">
                 <span class="preco-novo">R$ 78,50</span>
                 <img src="img/bag.png" alt="Carrinho" class="icone-carrinho">
@@ -160,9 +380,9 @@
 
         <div class="carousel-item text-center">
           <div class="card-jogo d-inline-block">
-            <img src="img/Chroma_Squad.png" alt="Chroma Squad" class="imagem-jogo" />
+            <img src="img/19.jpeg" alt="Capa do jogo Curse of the Dead Gods" class="imagem-jogo" />
             <div class="info-jogo">
-              <p>Chroma Squad</p>
+              <p>Curse of the Dead Gods</p>
               <div class="preco-carrinho">
                 <span class="preco-novo">R$ 178,90</span>
                 <img src="img/bag.png" alt="Carrinho" class="icone-carrinho">
@@ -173,9 +393,9 @@
 
         <div class="carousel-item text-center">
           <div class="card-jogo d-inline-block">
-            <img src="img/Scroals_soction.png" alt="Scroals Soction" class="imagem-jogo" />
+            <img src="img/BemFeito.jpg" alt="Bem feito" class="imagem-jogo" />
             <div class="info-jogo">
-              <p>Scroals Soction</p>
+              <p>Bem feito</p>
               <div class="preco-carrinho">
                 <span class="preco-novo">R$ 88,90</span>
                 <img src="img/bag.png" alt="Carrinho" class="icone-carrinho">
@@ -186,9 +406,9 @@
 
         <div class="carousel-item text-center">
           <div class="card-jogo d-inline-block">
-            <img src="img/dandara.jpg" alt="Dandara: Trials of Fear Edition" class="imagem-jogo" />
+            <img src="img/Bravery.jpg" alt=" Capa do jogo Bravery" class="imagem-jogo" />
             <div class="info-jogo">
-              <p>Dandara: Trials of Fear Edition</p>
+              <p>Bravery</p>
               <div class="preco-carrinho">
                 <span class="preco-novo">R$ 38,20</span>
                 <img src="img/bag.png" alt="Carrinho" class="icone-carrinho">
@@ -198,7 +418,6 @@
         </div>
       </div>
 
-      <!--navegação-->
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselJogos" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
       </button>
@@ -206,28 +425,73 @@
         <span class="carousel-control-next-icon"></span>
       </button>
     </div>
+</div>
 
-    <footer class="footer">
-      <div class="footer-conteudo">
-
-        <div class="footer-logo">
-          <img src="img/IaraLogo.png" alt="Logo Iara Games" />
-          <span>Iara<br />Games</span>
+<!-- Footer -->
+<footer class="text-light pt-5 pb-3">
+  <div class="container-fluid footer-box">
+    <div class="row align-items-start footer-box">
+      <div id="footer_logo" class="col-md-4 mb-5">
+        <div class="d-flex align-items-center mb-2 ">
+          <img src="./img/IaraLogo.png" alt="Logo Iara Games" width="100" class="me-2">
+          <div class="logo-text d-flex flex-column text-white">
+          <span style="font-size: 27px ;" class="fw-bold">Iara</span>
+          <span style="font-weight: bold; font-size: 27px;" >Games</span>
         </div>
-
-        <div class="footer-linha"></div>
-
-        <div class="footer-info">
-          <p>©2025 Iara Games</p>
-          <p>by Ana Beatriz Lisboa de Mello - RM 565816</p>
         </div>
-
+        <p id="footer_contato" class="mb-0">+55 (11) 94181-9998</p>
+        <p class="mb-4">support@iara.com</p>
       </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-      crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+
+      <div  class="col-md-3 mb-0 quick-links">
+        <h6 style="font-size: 25px;" class="text-none mb-3">Quick Links</h6>
+        <div class="row">
+          <div class="col-6">
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-light text-decoration-none">Sobre nós</a></li>
+              <li><a href="#" class="text-light text-decoration-none">Jogos</a></li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-light text-decoration-none">Comunidade</a></li>
+              <li><a href="#" class="text-light text-decoration-none">Contate-nos</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+       
+      <div class="col-md-4 mb-4 box-inscreva-se">
+        <h6 style="font-size: 25px;" class="text-none mb-3">Inscreva-se</h6>
+        <form class="d-flex quero-receber">
+          <input type="email" class="form-control w-auto me-3 ms-sm-4 ms-md-3 ms-lg-4" placeholder="E-mail">
+          <button class="btn btn-success quero">QUERO RECEBER</button>
+        </form>
+      </div>
+    </div>
+
+    <hr class="bg-secondary">
+
+    <div class="d-flex justify-content-between flex-wrap">
+      <div id="footer_redes" class="d-flex align-items-center gap-4 mb-4">
+        <a class="social-icon" href="#"><i class="bi bi-linkedin text-light"></i></a>
+        <a class="social-icon" href="#"><i class="bi bi-facebook text-light"></i></a>
+        <a class="social-icon" href="#"><i class="bi bi-twitter text-light"></i></a>
+      </div>
+      <div class="mb-2 mt-4 product">
+        <span class="me-2">A product of</span>
+        <img src="./img/IaraLogo.png" alt="Logo Iara" width="24">
+      </div>
+      <div style="margin-right: 4rem;" class="mb-2 mt-4 right">
+        © 2025 Iara Games. All rights reserved
+      </div>
+    </div>
+  </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+<script src="profile-component.js"></script>
 </body>
 
 </html>

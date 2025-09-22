@@ -1,203 +1,239 @@
-@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inria Sans', sans-serif;
-}
-
 body {
-    background-color: #0D161F;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  font-family: 'Inria Sans', sans-serif;
+  background-color: #00030F;
+  margin: 0;
+  min-height: 100vh;
+  background: #00030F url('img/capa home.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Estilos para página de cadastro */
+.portal-bg {
+  background: #00030F url('img/capa home.png') no-repeat center center;
+  background-size: cover;
+}
+
+.form-side {
+  background-color: transparent;
+  padding: 2rem;
+}
+
+.title {
+  color: #fff;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.subtitle {
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+/* Estilos para página de login */
 .container {
-    width: 100%;
-    max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .form-box {
-    border-color: #166dc4;
-    background-color: transparent;
-    padding: 40px;
-    border: 3px solid #24303C;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    
-
+  background-color: rgba(0, 3, 15, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-h1 {
-    color: #fff;
-    font-weight: bold;
-    font-size: 22px;
+.form-box h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .logo {
-    width: 80px;
-    margin: 10px 0;
+  max-width: 80px;
+  margin-bottom: 10px;
 }
 
 .brand-name {
-    color: #fff;
-    font-size: 18px;
-    margin-bottom: 20px;
+  color: #1DD70C;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.formulario {
+  text-align: left;
+}
+
+.acessibilidade {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.acessibilidade button {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.acessibilidade button:hover {
+  background-color: #1DD70C;
+  border-color: #1DD70C;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-    color: #fff;
-    font-size: 17px;
-    text-align: left;
-    margin-top: 10px;
-    font-weight: bold;
-
-
+  color: #fff;
+  margin-bottom: 5px;
+  font-weight: 500;
 }
 
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 8px;
-    border: 2px solid #24303C;
-    background-color: transparent;
-    color: white;
-    margin-bottom: 10px;
+input[type="email"],
+input[type="password"] {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
 }
 
-.name-fields {
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
-   
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #1DD70C;
+  box-shadow: 0 0 0 2px rgba(29, 215, 12, 0.25);
 }
 
-.name-fields div {
-    width: 48%;
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .login-btn {
-    background-color: #1DD70C;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    font-size: 22px;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    margin-top: 15px;
-    cursor: pointer;
+  background-color: #1DD70C;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s;
 }
 
 .login-btn:hover {
-    background-color: #17b00b;
+  background-color: #17b309;
+  transform: translateY(-2px);
 }
-
-a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  a:visited {
-    color: inherit;
-  }
-  
-  a:hover {
-    text-decoration: none;
-  }
-  
-
-
-.formulario{
-    padding: 12px;
-}
-
-.senha{
-    text-align: left;
-    color: #fff;
-    margin-top: 22px;
-}
-
-
-
 
 .social-login {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 70px;
+  margin: 20px 0;
 }
 
 .social-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
 }
 
 .social-btn:hover {
-    background-color: #222;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #1DD70C;
 }
 
-.google {
-    border-color: #24303C;
-}
-
-.facebook {
-    border-color: #24303C;
+.social-btn .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
 
 .signup-text {
-    text-align: center;
-    margin-top: 40px;
-    color: #3c4349;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .signup-text a {
-    color: #00ffff;
-    text-decoration: underline;
+  color: #1DD70C;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-
-
-.social-btn img.icon {
-    width: 20px;
-    height: 20px;
+.signup-text a:hover {
+  text-decoration: underline;
 }
 
-.google {
-    border-color: #24303C;
+.form-control {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
 }
 
-.facebook {
-    border-color: #24303C;
+.form-control::placeholder {
+  color: #fff;
 }
 
+.form-control:focus {
+  border-color: #1DD70C;
+  box-shadow: 0 0 0 0.25rem rgba(29, 215, 12, 0.25);
+}
 
+.btn-submit {
+  background-color: #1DD70C;
+  color: #fff;
+  border: none;
+}
 
-.acessibilidade button {
-    background: none;
-    color: #ffffff;
-    padding: 4px 8px;
-    font-size: 12px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
+.btn-login, .btn-eye {
+  background-color: transparent;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.btn-login:hover {
+  color: #1DD70C;
+}
+
+.input-group .form-control {
+  border-right: none;
+}
+
+.input-group .btn-eye {
+  border-left: none;
+}
+
+.is-invalid {
+  border-color: red !important;
+}
