@@ -21,13 +21,13 @@
     <div class="container-fluid d-flex justify-content-between align-items-center">
     <!-- Logo -->
     
-        <div class="d-flex align-items-center">
+        <a href="index.html" class="d-flex align-items-center text-decoration-none">
         <img src="./img/IaraLogo.png" alt="Logo" class="me-2 logo-topo" style="height: 80px;">
         <div class="logo-text d-flex flex-column text-white">
         <span style="font-size: 27px;" class=" iara-logo fw-bold">Iara</span>
         <span style="font-size: 27px;" class="fw-bold">Games</span>
         </div>
-    </div>
+    </a>
 
     <!-- Botão de toggle (mobile) -->
     <button class="navbar-toggler d-lg-none " type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,16 +37,22 @@
     <!-- Menu -->
     <div class="collapse navbar-collapse d-lg-none justify-content-end mt-3 me-5 me-md-6 " id="menuPrincipal">
         <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-5 gap-md-3">
+        <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="index.html">HOME</a></li>
         <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">COMUNIDADE</a></li>
-        <li style="font-size: 21px;"class="nav-item"><a class="nav-link text-white" href="#">JOGOS</a></li>
+        <li style="font-size: 21px;"class="nav-item"><a class="nav-link text-white" href="biblioteca.html">JOGOS</a></li>
         <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">ACESSIBILIDADE</a></li>
         <li class="nav-item">
           <a href="cadastro.html"> 
             <button id="loginButton" class="btn btn-outline-light">Entrar</button>
             </a>
         </li>
+
         <li class="nav-item">
-            <img class="carrinho-icone" src="img/carrinho menu.png" alt="Adicionar ao carrinho" style="height: 45px;">
+            <div class="carrinho-container">
+                <svg class="carrinho-icone" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                    <path d="M7 18C5.9 18 5 18.9 5 20S5.9 22 7 22 9 21.1 9 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.24 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2M17 18C15.9 18 15 18.9 15 20S15.9 22 17 22 19 21.1 19 20 18.1 18 17 18Z"/>
+                </svg>
+            </div>
         </li>
         </ul>
     </div>
@@ -455,7 +461,7 @@
           <div class="col-6">
             <ul class="list-unstyled">
               <li><a href="#" class="text-light text-decoration-none">Sobre nós</a></li>
-              <li><a href="#" class="text-light text-decoration-none">Jogos</a></li>
+              <li><a href="biblioteca.html" class="text-light text-decoration-none">Jogos</a></li>
             </ul>
           </div>
           <div class="col-6">
@@ -501,6 +507,7 @@
 
 
 <script src="./js/biblioteca.js"></script>
+<script src="profile-component.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
 </body>

@@ -1,0 +1,25 @@
+{
+  "perfil_usuario": {
+    "html": "<div class=\"header\"> <div class=\"logo\">Iara Games</div> <div class=\"menu\"> <a href=\"#\">Comunidade</a> <a href=\"#\">Jogos</a> <a href=\"#\">Acessibilidade</a> <a href=\"#\" class=\"active\">Meu Perfil</a> </div> </div> <div class=\"aside\"> <div class=\"aside_list\"> <ul> <li class=\"perfil\"><a href=\"#\">Meu perfil</a></li> <li><a href=\"#\">Minhas compras</a></li> </ul> </div> <div class=\"container\"> <div class=\"card\"> <img src=\"https://cdn-icons-png.flaticon.com/512/3135/3135715.png\" width=\"100\" style=\"border-radius: 50%;\" /> <form id=\"perfilForm\"> <p><b>Nome:</b><br><input id=\"nome\" value=\"Sid\"></p> <p><b>Email:</b><br><input id=\"email\" value=\"sidd@dasgrowithx.com\"></p> <p><b>Whatsapp:</b><br><input id=\"whatsapp\" value=\"+55 49 652845732\"></p> <h3>Sobre você</h3> <textarea id=\"sobre\">Lorem ipsum dolor sit amet consectetur. Etiam auctor...</textarea> <button type=\"button\" onclick=\"salvarPerfil()\">Salvar</button> </form> </div> <div class=\"card\" style=\"background:#63C9BB;\"> <h3>Detalhes do jogador</h3> <p>Lorem ipsum dolor sit amet consectetur.</p> <h4>Expertise</h4> <span class=\"tag\">RPG</span> <span class=\"tag\">Ação</span> <h4>Anos de jogador</h4> <p>7 anos de experiência</p> <h4>Avaliações</h4> <p>⭐ 4 estrelas</p> <h4>Review de outros jogadores</h4> <p><b>Ankit Srivastava</b> ⭐⭐⭐⭐</p> <p>Lorem ipsum dolor sit amet...</p> </div> </div> </div>",
+    "css": "body { background: #00030F; color: white; font-family: 'Arial', sans-serif; } .aside{ display: flex; } .aside_list ul{ list-style-type: none; } .aside_list ul li a{ text-decoration: none; color: white; } .aside_list ul .perfil a{ border: solid; border-top: 0; border-right: 0; border-left: 0; border-color: #63C9BB; } .container { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; padding: 20px; } .card { background: #000000; padding: 20px; border-radius: 12px; border: solid; border-color: #63C9BB; } .card h3 { margin-top: 0; } .tag { display: inline-block; background: #0f766e; padding: 4px 10px; border-radius: 12px; margin: 2px; } .header { display: flex; justify-content: space-between; padding: 10px 20px; background: #00030F; } .menu a { margin: 0 15px; color: white; text-decoration: none; } .menu a.active { background: #00ff88; padding: 5px 10px; border-radius: 8px; color: black; } input, textarea { width: 100%; padding: 6px; margin: 5px 0; border-radius: 6px; border: none; } button { background: #00ff88; color: black; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; margin-top: 5px; }",
+    "javascript": "function salvarPerfil(){ var dados = { nome: document.getElementById('nome').value, email: document.getElementById('email').value, whatsapp: document.getElementById('whatsapp').value, sobre: document.getElementById('sobre').value }; if(window.parent) { window.parent.postMessage({payload: dados}, \"*\"); } alert(\"Perfil atualizado!\"); }",
+    "dados_usuario": {
+      "nome": "Sid",
+      "email": "sidd@dasgrowithx.com",
+      "whatsapp": "+55 49 652845732",
+      "sobre": "Lorem ipsum dolor sit amet consectetur. Etiam auctor...",
+      "detalhes_jogador": {
+        "expertise": ["RPG", "Ação"],
+        "anos_experiencia": "7 anos de experiência",
+        "avaliacao": "4 estrelas",
+        "reviews": [
+          {
+            "autor": "Ankit Srivastava",
+            "estrelas": 4,
+            "comentario": "Lorem ipsum dolor sit amet..."
+          }
+        ]
+      }
+    }
+  }
+}

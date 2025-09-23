@@ -50,7 +50,99 @@
         </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        // Funcionalidade de acessibilidade para aumentar/diminuir fonte
+        const aumentarFonte = document.getElementById('aumentar-fonte');
+        const diminuirFonte = document.getElementById('diminuir-fonte');
+        
+        if (aumentarFonte) {
+            aumentarFonte.addEventListener('click', function() {
+                const body = document.body;
+                const currentSize = window.getComputedStyle(body).fontSize;
+                const newSize = parseFloat(currentSize) * 1.1;
+                body.style.fontSize = newSize + 'px';
+            });
+        }
+        
+        if (diminuirFonte) {
+            diminuirFonte.addEventListener('click', function() {
+                const body = document.body;
+                const currentSize = window.getComputedStyle(body).fontSize;
+                const newSize = parseFloat(currentSize) * 0.9;
+                body.style.fontSize = newSize + 'px';
+            });
+        }
+        
+        // Funcionalidade do formulário de login
+        const loginForm = document.querySelector('form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Validação básica
+                if (!email || !password) {
+                    alert('Por favor, preencha todos os campos.');
+                    return;
+                }
+                
+                if (!email.includes('@')) {
+                    alert('Por favor, insira um email válido.');
+                    return;
+                }
+                
+                try {
+                    // Verificar se existe usuário cadastrado no localStorage
+                    const registeredUser = localStorage.getItem('currentUser');
+                    let userData = null;
+                    
+                    if (registeredUser) {
+                        const parsedUser = JSON.parse(registeredUser);
+                        if (parsedUser.email === email) {
+                            userData = parsedUser;
+                        }
+                    }
+                    
+                    // Se não encontrou no localStorage, verificar no arquivo JSON
+                    if (!userData) {
+                        try {
+                            const response = await fetch('perfil-usuario.json');
+                            const data = await response.json();
+                            const defaultUser = data.perfil_usuario.dados_usuario;
+                            
+                            if (defaultUser.email === email) {
+                                userData = {
+                                    nome: defaultUser.nome,
+                                    email: defaultUser.email,
+                                    username: defaultUser.nome.toLowerCase().replace(' ', ''),
+                                    whatsapp: defaultUser.whatsapp || '',
+                                    sobre: defaultUser.sobre || ''
+                                };
+                            }
+                        } catch (error) {
+                            console.log('Erro ao carregar dados do arquivo JSON:', error);
+                        }
+                    }
+                    
+                    if (userData) {
+                        // Salvar dados do usuário logado no localStorage
+                        localStorage.setItem('currentUser', JSON.stringify(userData));
+                        
+                        alert('Login realizado com sucesso!');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Email não encontrado. Verifique suas credenciais ou faça o cadastro.');
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro durante o login:', error);
+                    alert('Erro durante o login. Tente novamente.');
+                }
+            });
+        }
+    </script></script>
 
 </body>
 </html>
