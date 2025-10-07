@@ -13,8 +13,6 @@ const {
     validateIdParam,
     validateReviewListQuery
 } = require('../middleware/validation');
-
-// GET /api/reviews - Listar reviews com filtros e paginação
 router.get('/', validateReviewListQuery, async (req, res) => {
     try {
         const options = {
@@ -25,9 +23,7 @@ router.get('/', validateReviewListQuery, async (req, res) => {
             estrelas_min: req.query.estrelas_min ? parseInt(req.query.estrelas_min) : null,
             ordenacao: req.query.ordenacao || 'recente'
         };
-
         const result = await Review.list(options);
-
         res.json({
             success: true,
             data: result
@@ -40,20 +36,16 @@ router.get('/', validateReviewListQuery, async (req, res) => {
         });
     }
 });
-
-// GET /api/reviews/:id - Obter detalhes de uma review específica
 router.get('/:id', validateIdParam, async (req, res) => {
     try {
         const reviewId = parseInt(req.params.id);
         const review = await Review.findById(reviewId);
-
         if (!review) {
             return res.status(404).json({
                 success: false,
                 message: 'Review não encontrada'
             });
         }
-
         res.json({
             success: true,
             data: {
@@ -68,12 +60,9 @@ router.get('/:id', validateIdParam, async (req, res) => {
         });
     }
 });
-
-// POST /api/reviews - Criar nova review
 router.post('/', authenticateToken, validateReviewCreation, canReview, async (req, res) => {
     try {
         const { game_id, estrelas, comentario } = req.body;
-
         const game = await Game.findById(game_id);
         if (!game) {
             return res.status(404).json({
@@ -81,14 +70,12 @@ router.post('/', authenticateToken, validateReviewCreation, canReview, async (re
                 message: 'Jogo não encontrado'
             });
         }
-
         const review = await Review.create({
             user_id: req.user.id,
             game_id,
             estrelas,
             comentario
         });
-
         res.status(201).json({
             success: true,
             message: 'Review criada com sucesso',
@@ -103,7 +90,6 @@ router.post('/', authenticateToken, validateReviewCreation, canReview, async (re
                 message: error.message
             });
         }
-
         console.error('Erro ao criar review:', error);
         res.status(500).json({
             success: false,
@@ -111,16 +97,11 @@ router.post('/', authenticateToken, validateReviewCreation, canReview, async (re
         });
     }
 });
-
-// PUT /api/reviews/:id - Atualizar review
 router.put('/:id', validateIdParam, authenticateToken, requireReviewOwnership, validateReviewUpdate, async (req, res) => {
     try {
         const review = req.review;
-
         await review.update(req.body);
-
         const updatedReview = await Review.findById(review.id);
-
         res.json({
             success: true,
             message: 'Review atualizada com sucesso',
@@ -136,14 +117,10 @@ router.put('/:id', validateIdParam, authenticateToken, requireReviewOwnership, v
         });
     }
 });
-
-// DELETE /api/reviews/:id - Deletar review
 router.delete('/:id', validateIdParam, authenticateToken, requireReviewOwnership, async (req, res) => {
     try {
         const review = req.review;
-
         await review.delete();
-
         res.json({
             success: true,
             message: 'Review deletada com sucesso'
@@ -156,29 +133,23 @@ router.delete('/:id', validateIdParam, authenticateToken, requireReviewOwnership
         });
     }
 });
-
-// POST /api/reviews/:id/like - Curtir review
 router.post('/:id/like', validateIdParam, authenticateToken, async (req, res) => {
     try {
         const reviewId = parseInt(req.params.id);
         const review = await Review.findById(reviewId);
-
         if (!review) {
             return res.status(404).json({
                 success: false,
                 message: 'Review não encontrada'
             });
         }
-
         if (review.user_id === req.user.id) {
             return res.status(400).json({
                 success: false,
                 message: 'Você não pode curtir sua própria review'
             });
         }
-
         await review.addLike();
-
         res.json({
             success: true,
             message: 'Review curtida com sucesso',
@@ -194,29 +165,23 @@ router.post('/:id/like', validateIdParam, authenticateToken, async (req, res) =>
         });
     }
 });
-
-// DELETE /api/reviews/:id/like - Descurtir review
 router.delete('/:id/like', validateIdParam, authenticateToken, async (req, res) => {
     try {
         const reviewId = parseInt(req.params.id);
         const review = await Review.findById(reviewId);
-
         if (!review) {
             return res.status(404).json({
                 success: false,
                 message: 'Review não encontrada'
             });
         }
-
         if (review.user_id === req.user.id) {
             return res.status(400).json({
                 success: false,
                 message: 'Você não pode descurtir sua própria review'
             });
         }
-
         await review.removeLike();
-
         res.json({
             success: true,
             message: 'Curtida removida com sucesso',
@@ -232,22 +197,18 @@ router.delete('/:id/like', validateIdParam, authenticateToken, async (req, res) 
         });
     }
 });
-
-// GET /api/reviews/user/:userId - Obter reviews de um usuário específico
 router.get('/user/:userId', async (req, res) => {
     try {
         const userId = parseInt(req.params.userId);
         const limite = parseInt(req.query.limite) || 20;
         const pagina = parseInt(req.query.pagina) || 1;
         const ordenacao = req.query.ordenacao || 'recente';
-
         const result = await Review.list({
             limite,
             pagina,
             user_id: userId,
             ordenacao
         });
-
         res.json({
             success: true,
             data: result
@@ -260,8 +221,6 @@ router.get('/user/:userId', async (req, res) => {
         });
     }
 });
-
-// GET /api/reviews/game/:gameId - Obter reviews de um jogo específico
 router.get('/game/:gameId', async (req, res) => {
     try {
         const gameId = parseInt(req.params.gameId);
@@ -269,7 +228,6 @@ router.get('/game/:gameId', async (req, res) => {
         const pagina = parseInt(req.query.pagina) || 1;
         const estrelas_min = req.query.estrelas_min ? parseInt(req.query.estrelas_min) : null;
         const ordenacao = req.query.ordenacao || 'recente';
-
         const result = await Review.list({
             limite,
             pagina,
@@ -277,7 +235,6 @@ router.get('/game/:gameId', async (req, res) => {
             estrelas_min,
             ordenacao
         });
-
         res.json({
             success: true,
             data: result
@@ -290,13 +247,10 @@ router.get('/game/:gameId', async (req, res) => {
         });
     }
 });
-
-// GET /api/reviews/stats/user/:userId - Estatísticas de reviews do usuário
 router.get('/stats/user/:userId', async (req, res) => {
     try {
         const userId = parseInt(req.params.userId);
         const stats = await Review.getUserStats(userId);
-
         res.json({
             success: true,
             data: stats
@@ -309,13 +263,10 @@ router.get('/stats/user/:userId', async (req, res) => {
         });
     }
 });
-
-// GET /api/reviews/stats/game/:gameId - Estatísticas de reviews do jogo
 router.get('/stats/game/:gameId', async (req, res) => {
     try {
         const gameId = parseInt(req.params.gameId);
         const stats = await Review.getGameStats(gameId);
-
         res.json({
             success: true,
             data: stats
@@ -328,15 +279,11 @@ router.get('/stats/game/:gameId', async (req, res) => {
         });
     }
 });
-
-// GET /api/reviews/check/:gameId - Verificar se usuário pode fazer review
 router.get('/check/:gameId', authenticateToken, async (req, res) => {
     try {
         const gameId = parseInt(req.params.gameId);
         const userId = req.user.id;
-
         const canReview = await Review.canUserReview(userId, gameId);
-
         res.json({
             success: true,
             data: {
@@ -352,5 +299,4 @@ router.get('/check/:gameId', authenticateToken, async (req, res) => {
         });
     }
 });
-
 module.exports = router;

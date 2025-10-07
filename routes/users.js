@@ -12,27 +12,21 @@ const {
     validateUserIdParam,
     validatePaginationQuery
 } = require('../middleware/validation');
-
-// GET /api/users/:id - Obter dados de um usuário específico
 router.get('/:id', validateIdParam, optionalAuth, async (req, res) => {
     try {
         const userId = parseInt(req.params.id);
         const user = await User.findById(userId);
-
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: 'Usuário não encontrado'
             });
         }
-
-        // Remover dados sensíveis se não for o próprio usuário
         const userData = user.toJSON();
         if (!req.user || req.user.id !== userId) {
             delete userData.email;
             delete userData.whatsapp;
         }
-
         res.json({
             success: true,
             data: {
@@ -47,21 +41,16 @@ router.get('/:id', validateIdParam, optionalAuth, async (req, res) => {
         });
     }
 });
-
-// PUT /api/users/:id - Atualizar dados do usuário
 router.put('/:id', validateIdParam, authenticateToken, requireOwnershipOrAdmin, validateUserUpdate, async (req, res) => {
     try {
         const userId = parseInt(req.params.id);
         const user = await User.findById(userId);
-
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: 'Usuário não encontrado'
             });
         }
-
-        // Verificar se email já existe (se estiver sendo alterado)
         if (req.body.email && req.body.email !== user.email) {
             const emailExists = await User.emailExists(req.body.email, userId);
             if (emailExists) {
@@ -71,13 +60,8 @@ router.put('/:id', validateIdParam, authenticateToken, requireOwnershipOrAdmin, 
                 });
             }
         }
-
-        // Atualizar usuário
         await user.update(req.body);
-
-        // Buscar dados atualizados
         const updatedUser = await User.findById(userId);
-
         res.json({
             success: true,
             message: 'Usuário atualizado com sucesso',
@@ -93,15 +77,12 @@ router.put('/:id', validateIdParam, authenticateToken, requireOwnershipOrAdmin, 
         });
     }
 });
-
-// GET /api/users/:id/reviews - Obter reviews do usuário
 router.get('/:id/reviews', validateIdParam, validatePaginationQuery, async (req, res) => {
     try {
         const userId = parseInt(req.params.id);
         const limite = parseInt(req.query.limite) || 20;
         const pagina = parseInt(req.query.pagina) || 1;
         const offset = (pagina - 1) * limite;
-
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({
@@ -109,11 +90,8 @@ router.get('/:id/reviews', validateIdParam, validatePaginationQuery, async (req,
                 message: 'Usuário não encontrado'
             });
         }
-
-        // Buscar reviews do usuário
         const reviews = await user.getReviews(limite, offset);
         const totalReviews = await user.getReviewsCount();
-
         res.json({
             success: true,
             data: {
@@ -134,12 +112,9 @@ router.get('/:id/reviews', validateIdParam, validatePaginationQuery, async (req,
         });
     }
 });
-
-// GET /api/users/:id/stats - Obter estatísticas do usuário
 router.get('/:id/stats', validateIdParam, async (req, res) => {
     try {
         const userId = parseInt(req.params.id);
-        
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({
@@ -147,10 +122,8 @@ router.get('/:id/stats', validateIdParam, async (req, res) => {
                 message: 'Usuário não encontrado'
             });
         }
-
         const Review = require('../models/Review');
         const stats = await Review.getUserStats(userId);
-
         res.json({
             success: true,
             data: {
@@ -171,26 +144,19 @@ router.get('/:id/stats', validateIdParam, async (req, res) => {
         });
     }
 });
-
-// GET /api/users - Listar usuários (para busca/admin)
 router.get('/', validatePaginationQuery, async (req, res) => {
     try {
         const limite = parseInt(req.query.limite) || 20;
         const pagina = parseInt(req.query.pagina) || 1;
         const busca = req.query.busca || '';
         const offset = (pagina - 1) * limite;
-
         const users = await User.list(limite, offset, busca);
-
-        // Contar total para paginação
         const totalResult = await User.list(1, 0, busca);
         const total = totalResult.length > 0 ? totalResult[0].total || users.length : 0;
-
         res.json({
             success: true,
             data: {
                 users: users.map(user => {
-                    // Remover dados sensíveis
                     const { email, whatsapp, ...publicData } = user;
                     return publicData;
                 }),
@@ -210,20 +176,16 @@ router.get('/', validatePaginationQuery, async (req, res) => {
         });
     }
 });
-
-// POST /api/users/:id/follow - Seguir usuário (placeholder para funcionalidade futura)
 router.post('/:id/follow', validateIdParam, authenticateToken, async (req, res) => {
     try {
         const targetUserId = parseInt(req.params.id);
         const currentUserId = req.user.id;
-
         if (targetUserId === currentUserId) {
             return res.status(400).json({
                 success: false,
                 message: 'Você não pode seguir a si mesmo'
             });
         }
-
         const targetUser = await User.findById(targetUserId);
         if (!targetUser) {
             return res.status(404).json({
@@ -231,9 +193,6 @@ router.post('/:id/follow', validateIdParam, authenticateToken, async (req, res) 
                 message: 'Usuário não encontrado'
             });
         }
-
-        // Implementar lógica de seguir usuário aqui
-        // Por enquanto, apenas retorna sucesso
         res.json({
             success: true,
             message: 'Funcionalidade de seguir usuários será implementada em breve'
@@ -246,20 +205,16 @@ router.post('/:id/follow', validateIdParam, authenticateToken, async (req, res) 
         });
     }
 });
-
-// DELETE /api/users/:id/follow - Deixar de seguir usuário (placeholder)
 router.delete('/:id/follow', validateIdParam, authenticateToken, async (req, res) => {
     try {
         const targetUserId = parseInt(req.params.id);
         const currentUserId = req.user.id;
-
         if (targetUserId === currentUserId) {
             return res.status(400).json({
                 success: false,
                 message: 'Você não pode deixar de seguir a si mesmo'
             });
         }
-
         const targetUser = await User.findById(targetUserId);
         if (!targetUser) {
             return res.status(404).json({
@@ -267,8 +222,6 @@ router.delete('/:id/follow', validateIdParam, authenticateToken, async (req, res
                 message: 'Usuário não encontrado'
             });
         }
-
-        // Implementar lógica de deixar de seguir usuário aqui
         res.json({
             success: true,
             message: 'Funcionalidade de deixar de seguir usuários será implementada em breve'
@@ -281,5 +234,4 @@ router.delete('/:id/follow', validateIdParam, authenticateToken, async (req, res
         });
     }
 });
-
 module.exports = router;

@@ -13,8 +13,6 @@ const {
     validateIdParam,
     validateGameListQuery
 } = require('../middleware/validation');
-
-// GET /api/games - Listar jogos com filtros e paginação
 router.get('/', validateGameListQuery, async (req, res) => {
     try {
         const options = {
@@ -27,9 +25,7 @@ router.get('/', validateGameListQuery, async (req, res) => {
             tags: req.query.tags ? (Array.isArray(req.query.tags) ? req.query.tags : [req.query.tags]) : [],
             ordenacao: req.query.ordenacao || 'nome'
         };
-
         const result = await Game.list(options);
-
         res.json({
             success: true,
             data: result
@@ -42,12 +38,9 @@ router.get('/', validateGameListQuery, async (req, res) => {
         });
     }
 });
-
-// GET /api/games/categories - Obter categorias disponíveis
 router.get('/categories', async (req, res) => {
     try {
         const categories = await Game.getCategories();
-
         res.json({
             success: true,
             data: {
@@ -62,12 +55,9 @@ router.get('/categories', async (req, res) => {
         });
     }
 });
-
-// GET /api/games/tags - Obter tags disponíveis
 router.get('/tags', async (req, res) => {
     try {
         const tags = await Game.getTags();
-
         res.json({
             success: true,
             data: {
@@ -82,29 +72,22 @@ router.get('/tags', async (req, res) => {
         });
     }
 });
-
-// GET /api/games/:id - Obter detalhes de um jogo específico
 router.get('/:id', validateIdParam, optionalAuth, async (req, res) => {
     try {
         const gameId = parseInt(req.params.id);
         const game = await Game.findByIdWithReviews(gameId);
-
         if (!game) {
             return res.status(404).json({
                 success: false,
                 message: 'Jogo não encontrado'
             });
         }
-
         const reviewStats = await Review.getGameStats(gameId);
-
         const similarGames = await game.getSimilarGames(5);
-
         let userReview = null;
         if (req.user) {
             userReview = await Review.findByUserAndGame(req.user.id, gameId);
         }
-
         res.json({
             success: true,
             data: {
@@ -123,8 +106,6 @@ router.get('/:id', validateIdParam, optionalAuth, async (req, res) => {
         });
     }
 });
-
-// POST /api/games - Criar novo jogo (admin apenas)
 router.post('/', authenticateToken, requireAdmin, validateGameCreation, async (req, res) => {
     try {
         const nameExists = await Game.nameExists(req.body.nome);
@@ -134,9 +115,7 @@ router.post('/', authenticateToken, requireAdmin, validateGameCreation, async (r
                 message: 'Já existe um jogo com este nome'
             });
         }
-
         const game = await Game.create(req.body);
-
         res.status(201).json({
             success: true,
             message: 'Jogo criado com sucesso',
@@ -152,20 +131,16 @@ router.post('/', authenticateToken, requireAdmin, validateGameCreation, async (r
         });
     }
 });
-
-// PUT /api/games/:id - Atualizar jogo (admin apenas)
 router.put('/:id', validateIdParam, authenticateToken, requireAdmin, validateGameUpdate, async (req, res) => {
     try {
         const gameId = parseInt(req.params.id);
         const game = await Game.findById(gameId);
-
         if (!game) {
             return res.status(404).json({
                 success: false,
                 message: 'Jogo não encontrado'
             });
         }
-
         if (req.body.nome && req.body.nome !== game.nome) {
             const nameExists = await Game.nameExists(req.body.nome);
             if (nameExists) {
@@ -175,11 +150,8 @@ router.put('/:id', validateIdParam, authenticateToken, requireAdmin, validateGam
                 });
             }
         }
-
         await game.update(req.body);
-
         const updatedGame = await Game.findById(gameId);
-
         res.json({
             success: true,
             message: 'Jogo atualizado com sucesso',
@@ -195,22 +167,17 @@ router.put('/:id', validateIdParam, authenticateToken, requireAdmin, validateGam
         });
     }
 });
-
-// DELETE /api/games/:id - Deletar jogo (admin apenas)
 router.delete('/:id', validateIdParam, authenticateToken, requireAdmin, async (req, res) => {
     try {
         const gameId = parseInt(req.params.id);
         const game = await Game.findById(gameId);
-
         if (!game) {
             return res.status(404).json({
                 success: false,
                 message: 'Jogo não encontrado'
             });
         }
-
         await game.delete();
-
         res.json({
             success: true,
             message: 'Jogo deletado com sucesso'
@@ -223,8 +190,6 @@ router.delete('/:id', validateIdParam, authenticateToken, requireAdmin, async (r
         });
     }
 });
-
-// GET /api/games/:id/reviews - Obter reviews de um jogo específico
 router.get('/:id/reviews', validateIdParam, async (req, res) => {
     try {
         const gameId = parseInt(req.params.id);
@@ -232,7 +197,6 @@ router.get('/:id/reviews', validateIdParam, async (req, res) => {
         const pagina = parseInt(req.query.pagina) || 1;
         const estrelas_min = req.query.estrelas_min ? parseInt(req.query.estrelas_min) : null;
         const ordenacao = req.query.ordenacao || 'recente';
-
         const game = await Game.findById(gameId);
         if (!game) {
             return res.status(404).json({
@@ -240,7 +204,6 @@ router.get('/:id/reviews', validateIdParam, async (req, res) => {
                 message: 'Jogo não encontrado'
             });
         }
-
         const result = await Review.list({
             limite,
             pagina,
@@ -248,7 +211,6 @@ router.get('/:id/reviews', validateIdParam, async (req, res) => {
             estrelas_min,
             ordenacao
         });
-
         res.json({
             success: true,
             data: result
@@ -261,12 +223,9 @@ router.get('/:id/reviews', validateIdParam, async (req, res) => {
         });
     }
 });
-
-// GET /api/games/:id/stats - Obter estatísticas de um jogo
 router.get('/:id/stats', validateIdParam, async (req, res) => {
     try {
         const gameId = parseInt(req.params.id);
-        
         const game = await Game.findById(gameId);
         if (!game) {
             return res.status(404).json({
@@ -274,9 +233,7 @@ router.get('/:id/stats', validateIdParam, async (req, res) => {
                 message: 'Jogo não encontrado'
             });
         }
-
         const stats = await Review.getGameStats(gameId);
-
         res.json({
             success: true,
             data: stats
@@ -289,13 +246,10 @@ router.get('/:id/stats', validateIdParam, async (req, res) => {
         });
     }
 });
-
-// GET /api/games/:id/similar - Obter jogos similares
 router.get('/:id/similar', validateIdParam, async (req, res) => {
     try {
         const gameId = parseInt(req.params.id);
         const limite = parseInt(req.query.limite) || 5;
-        
         const game = await Game.findById(gameId);
         if (!game) {
             return res.status(404).json({
@@ -303,9 +257,7 @@ router.get('/:id/similar', validateIdParam, async (req, res) => {
                 message: 'Jogo não encontrado'
             });
         }
-
         const similarGames = await game.getSimilarGames(limite);
-
         res.json({
             success: true,
             data: {
@@ -320,5 +272,4 @@ router.get('/:id/similar', validateIdParam, async (req, res) => {
         });
     }
 });
-
 module.exports = router;

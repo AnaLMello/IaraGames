@@ -4,13 +4,10 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
-
-// Configuração do multer para upload de arquivos
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const uploadType = req.params.type;
         let uploadPath;
-
         switch (uploadType) {
             case 'avatar':
                 uploadPath = path.join(__dirname, '../uploads/avatars');
@@ -21,12 +18,9 @@ const storage = multer.diskStorage({
             default:
                 return cb(new Error('Tipo de upload inválido'));
         }
-
-        // Criar diretório se não existir
         if (!fs.existsSync(uploadPath)) {
             fs.mkdirSync(uploadPath, { recursive: true });
         }
-
         cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
@@ -36,19 +30,14 @@ const storage = multer.diskStorage({
         cb(null, filename);
     }
 });
-
-// Filtro de arquivos - apenas imagens
 const fileFilter = (req, file, cb) => {
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-    
     if (allowedTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {
         cb(new Error('Tipo de arquivo não permitido. Apenas imagens são aceitas.'), false);
     }
 };
-
-// Configuração do multer
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
@@ -57,8 +46,6 @@ const upload = multer({
         files: 1 // Apenas 1 arquivo por vez
     }
 });
-
-// POST /api/upload/avatar - Upload de avatar do usuário
 router.post('/avatar', authenticateToken, upload.single('avatar'), async (req, res) => {
     try {
         if (!req.file) {
@@ -67,12 +54,7 @@ router.post('/avatar', authenticateToken, upload.single('avatar'), async (req, r
                 message: 'Nenhum arquivo foi enviado'
             });
         }
-
         const avatarUrl = `/uploads/avatars/${req.file.filename}`;
-
-        // Aqui você pode salvar a URL do avatar no banco de dados
-        // Por exemplo: await User.updateAvatar(req.user.id, avatarUrl);
-
         res.json({
             success: true,
             message: 'Avatar enviado com sucesso',
@@ -90,8 +72,6 @@ router.post('/avatar', authenticateToken, upload.single('avatar'), async (req, r
         });
     }
 });
-
-// POST /api/upload/game - Upload de imagem de jogo (apenas admin)
 router.post('/game', authenticateToken, requireAdmin, upload.single('game_image'), async (req, res) => {
     try {
         if (!req.file) {
@@ -100,9 +80,7 @@ router.post('/game', authenticateToken, requireAdmin, upload.single('game_image'
                 message: 'Nenhum arquivo foi enviado'
             });
         }
-
         const imageUrl = `/uploads/games/${req.file.filename}`;
-
         res.json({
             success: true,
             message: 'Imagem do jogo enviada com sucesso',
@@ -120,24 +98,17 @@ router.post('/game', authenticateToken, requireAdmin, upload.single('game_image'
         });
     }
 });
-
-// DELETE /api/upload/avatar/:filename - Deletar avatar
 router.delete('/avatar/:filename', authenticateToken, async (req, res) => {
     try {
         const filename = req.params.filename;
         const filePath = path.join(__dirname, '../uploads/avatars', filename);
-
-        // Verificar se o arquivo existe
         if (!fs.existsSync(filePath)) {
             return res.status(404).json({
                 success: false,
                 message: 'Arquivo não encontrado'
             });
         }
-
-        // Deletar arquivo
         fs.unlinkSync(filePath);
-
         res.json({
             success: true,
             message: 'Avatar deletado com sucesso'
@@ -150,24 +121,17 @@ router.delete('/avatar/:filename', authenticateToken, async (req, res) => {
         });
     }
 });
-
-// DELETE /api/upload/game/:filename - Deletar imagem de jogo (apenas admin)
 router.delete('/game/:filename', authenticateToken, requireAdmin, async (req, res) => {
     try {
         const filename = req.params.filename;
         const filePath = path.join(__dirname, '../uploads/games', filename);
-
-        // Verificar se o arquivo existe
         if (!fs.existsSync(filePath)) {
             return res.status(404).json({
                 success: false,
                 message: 'Arquivo não encontrado'
             });
         }
-
-        // Deletar arquivo
         fs.unlinkSync(filePath);
-
         res.json({
             success: true,
             message: 'Imagem do jogo deletada com sucesso'
@@ -180,13 +144,10 @@ router.delete('/game/:filename', authenticateToken, requireAdmin, async (req, re
         });
     }
 });
-
-// GET /api/upload/info/:type/:filename - Obter informações de um arquivo
 router.get('/info/:type/:filename', async (req, res) => {
     try {
         const { type, filename } = req.params;
         let filePath;
-
         switch (type) {
             case 'avatar':
                 filePath = path.join(__dirname, '../uploads/avatars', filename);
@@ -200,18 +161,13 @@ router.get('/info/:type/:filename', async (req, res) => {
                     message: 'Tipo de arquivo inválido'
                 });
         }
-
-        // Verificar se o arquivo existe
         if (!fs.existsSync(filePath)) {
             return res.status(404).json({
                 success: false,
                 message: 'Arquivo não encontrado'
             });
         }
-
-        // Obter informações do arquivo
         const stats = fs.statSync(filePath);
-
         res.json({
             success: true,
             data: {
@@ -230,8 +186,6 @@ router.get('/info/:type/:filename', async (req, res) => {
         });
     }
 });
-
-// Middleware de tratamento de erros do multer
 router.use((error, req, res, next) => {
     if (error instanceof multer.MulterError) {
         if (error.code === 'LIMIT_FILE_SIZE') {
@@ -253,27 +207,22 @@ router.use((error, req, res, next) => {
             });
         }
     }
-
     if (error.message === 'Tipo de arquivo não permitido. Apenas imagens são aceitas.') {
         return res.status(400).json({
             success: false,
             message: error.message
         });
     }
-
     if (error.message === 'Tipo de upload inválido') {
         return res.status(400).json({
             success: false,
             message: error.message
         });
     }
-
-    // Erro genérico
     console.error('Erro no upload:', error);
     res.status(500).json({
         success: false,
         message: 'Erro interno do servidor'
     });
 });
-
 module.exports = router;

@@ -9,30 +9,23 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-/* Estilos para página de cadastro */
 .portal-bg {
   background: #00030F url('img/capa home.png') no-repeat center center;
   background-size: cover;
 }
-
 .form-side {
   background-color: transparent;
   padding: 2rem;
 }
-
 .title {
   color: #fff;
   font-weight: bold;
   line-height: 1;
 }
-
 .subtitle {
   color: #fff;
   font-size: 1.25rem;
 }
-
-/* Estilos para página de login */
 .container {
   display: flex;
   align-items: center;
@@ -40,7 +33,6 @@ body {
   min-height: 100vh;
   padding: 20px;
 }
-
 .form-box {
   background-color: rgba(0, 3, 15, 0.9);
   padding: 40px;
@@ -51,35 +43,29 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .form-box h1 {
   color: #fff;
   font-size: 2.5rem;
   margin-bottom: 20px;
   font-weight: bold;
 }
-
 .logo {
   max-width: 80px;
   margin-bottom: 10px;
 }
-
 .brand-name {
   color: #1DD70C;
   font-size: 1.5rem;
   margin-bottom: 30px;
   font-weight: bold;
 }
-
 .formulario {
   text-align: left;
 }
-
 .acessibilidade {
   text-align: center;
   margin-bottom: 20px;
 }
-
 .acessibilidade button {
   background: transparent;
   border: 1px solid #fff;
@@ -90,23 +76,19 @@ body {
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .acessibilidade button:hover {
   background-color: #1DD70C;
   border-color: #1DD70C;
 }
-
 form {
   display: flex;
   flex-direction: column;
 }
-
 label {
   color: #fff;
   margin-bottom: 5px;
   font-weight: 500;
 }
-
 input[type="email"],
 input[type="password"] {
   background-color: transparent;
@@ -118,18 +100,15 @@ input[type="password"] {
   font-size: 16px;
   transition: all 0.3s;
 }
-
 input[type="email"]:focus,
 input[type="password"]:focus {
   outline: none;
   border-color: #1DD70C;
   box-shadow: 0 0 0 2px rgba(29, 215, 12, 0.25);
 }
-
 input::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
-
 .login-btn {
   background-color: #1DD70C;
   color: #fff;
@@ -142,16 +121,13 @@ input::placeholder {
   margin-bottom: 20px;
   transition: all 0.3s;
 }
-
 .login-btn:hover {
   background-color: #17b309;
   transform: translateY(-2px);
 }
-
 .social-login {
   margin: 20px 0;
 }
-
 .social-btn {
   display: flex;
   align-items: center;
@@ -167,73 +143,59 @@ input::placeholder {
   transition: all 0.3s;
   text-decoration: none;
 }
-
 .social-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: #1DD70C;
 }
-
 .social-btn .icon {
   width: 20px;
   height: 20px;
   margin-right: 10px;
 }
-
 .signup-text {
   color: #fff;
   text-align: center;
   margin-top: 20px;
 }
-
 .signup-text a {
   color: #1DD70C;
   text-decoration: none;
   font-weight: bold;
 }
-
 .signup-text a:hover {
   text-decoration: underline;
 }
-
 .form-control {
   background-color: transparent;
   border: 1px solid #fff;
   color: #fff;
 }
-
 .form-control::placeholder {
   color: #fff;
 }
-
 .form-control:focus {
   border-color: #1DD70C;
   box-shadow: 0 0 0 0.25rem rgba(29, 215, 12, 0.25);
 }
-
 .btn-submit {
   background-color: #1DD70C;
   color: #fff;
   border: none;
 }
-
 .btn-login, .btn-eye {
   background-color: transparent;
   color: #fff;
   text-decoration: underline;
 }
-
 .btn-login:hover {
   color: #1DD70C;
 }
-
 .input-group .form-control {
   border-right: none;
 }
-
 .input-group .btn-eye {
   border-left: none;
 }
-
 .is-invalid {
   border-color: red !important;
 }

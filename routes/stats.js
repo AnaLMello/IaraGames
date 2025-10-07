@@ -4,24 +4,14 @@ const User = require('../models/User');
 const Game = require('../models/Game');
 const Review = require('../models/Review');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
-
-// GET /api/stats/general - Estatísticas gerais da plataforma
 router.get('/general', async (req, res) => {
     try {
-        // Contar totais
         const totalUsers = await User.count();
         const totalGames = await Game.count();
         const totalReviews = await Review.count();
-
-        // Estatísticas de reviews
         const reviewStats = await Review.getGeneralStats();
-
-        // Jogos mais bem avaliados
         const topRatedGames = await Game.getTopRated(5);
-
-        // Usuários mais ativos (com mais reviews)
         const topReviewers = await User.getTopReviewers(5);
-
         res.json({
             success: true,
             data: {
@@ -43,12 +33,9 @@ router.get('/general', async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/games - Estatísticas de jogos
 router.get('/games', async (req, res) => {
     try {
         const gameStats = await Game.getStats();
-
         res.json({
             success: true,
             data: {
@@ -63,12 +50,9 @@ router.get('/games', async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/users - Estatísticas de usuários
 router.get('/users', async (req, res) => {
     try {
         const userStats = await User.getStats();
-
         res.json({
             success: true,
             data: {
@@ -83,12 +67,9 @@ router.get('/users', async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/reviews - Estatísticas de reviews
 router.get('/reviews', async (req, res) => {
     try {
         const reviewStats = await Review.getDetailedStats();
-
         res.json({
             success: true,
             data: {
@@ -103,15 +84,11 @@ router.get('/reviews', async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/trending - Jogos em tendência
 router.get('/trending', async (req, res) => {
     try {
         const period = req.query.period || '7d'; // 7d, 30d, 90d
         const limit = parseInt(req.query.limit) || 10;
-
         const trendingGames = await Game.getTrending(period, limit);
-
         res.json({
             success: true,
             data: {
@@ -127,12 +104,9 @@ router.get('/trending', async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/categories - Estatísticas por categoria
 router.get('/categories', async (req, res) => {
     try {
         const categoryStats = await Game.getCategoryStats();
-
         res.json({
             success: true,
             data: {
@@ -147,11 +121,8 @@ router.get('/categories', async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/admin - Estatísticas administrativas (apenas admin)
 router.get('/admin', authenticateToken, requireAdmin, async (req, res) => {
     try {
-        // Estatísticas detalhadas para administradores
         const adminStats = {
             users: {
                 total: await User.count(),
@@ -177,7 +148,6 @@ router.get('/admin', authenticateToken, requireAdmin, async (req, res) => {
                 memory_usage: process.memoryUsage()
             }
         };
-
         res.json({
             success: true,
             data: adminStats
@@ -190,13 +160,9 @@ router.get('/admin', authenticateToken, requireAdmin, async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/user/:userId - Estatísticas de um usuário específico
 router.get('/user/:userId', async (req, res) => {
     try {
         const userId = parseInt(req.params.userId);
-        
-        // Verificar se o usuário existe
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({
@@ -204,9 +170,7 @@ router.get('/user/:userId', async (req, res) => {
                 message: 'Usuário não encontrado'
             });
         }
-
         const userStats = await User.getUserDetailedStats(userId);
-
         res.json({
             success: true,
             data: {
@@ -221,13 +185,9 @@ router.get('/user/:userId', async (req, res) => {
         });
     }
 });
-
-// GET /api/stats/game/:gameId - Estatísticas de um jogo específico
 router.get('/game/:gameId', async (req, res) => {
     try {
         const gameId = parseInt(req.params.gameId);
-        
-        // Verificar se o jogo existe
         const game = await Game.findById(gameId);
         if (!game) {
             return res.status(404).json({
@@ -235,9 +195,7 @@ router.get('/game/:gameId', async (req, res) => {
                 message: 'Jogo não encontrado'
             });
         }
-
         const gameStats = await Game.getGameDetailedStats(gameId);
-
         res.json({
             success: true,
             data: {
@@ -252,14 +210,11 @@ router.get('/game/:gameId', async (req, res) => {
         });
     }
 });
-
-// Função auxiliar para obter tamanho do banco de dados
 async function getDatabaseSize() {
     try {
         const fs = require('fs');
         const path = require('path');
         const dbPath = process.env.DATABASE_PATH || './database/iaragames.db';
-        
         if (fs.existsSync(dbPath)) {
             const stats = fs.statSync(dbPath);
             return {
@@ -267,12 +222,10 @@ async function getDatabaseSize() {
                 size_mb: (stats.size / (1024 * 1024)).toFixed(2)
             };
         }
-        
         return { size_bytes: 0, size_mb: '0.00' };
     } catch (error) {
         console.error('Erro ao obter tamanho do banco:', error);
         return { size_bytes: 0, size_mb: '0.00' };
     }
 }
-
 module.exports = router;
