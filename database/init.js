@@ -1,16 +1,11 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
-
 const DB_PATH = process.env.DB_PATH || './database/iaragames.db';
-
-// Garantir que o diretório do banco existe
 const dbDir = path.dirname(DB_PATH);
 if (!fs.existsSync(dbDir)) {
     fs.mkdirSync(dbDir, { recursive: true });
 }
-
-// Função para conectar ao banco
 function connectDB() {
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(DB_PATH, (err) => {
@@ -24,8 +19,6 @@ function connectDB() {
         });
     });
 }
-
-// Função para executar query
 function runQuery(db, query, params = []) {
     return new Promise((resolve, reject) => {
         db.run(query, params, function(err) {
@@ -37,8 +30,6 @@ function runQuery(db, query, params = []) {
         });
     });
 }
-
-// Função para buscar dados
 function getQuery(db, query, params = []) {
     return new Promise((resolve, reject) => {
         db.get(query, params, (err, row) => {
@@ -50,8 +41,6 @@ function getQuery(db, query, params = []) {
         });
     });
 }
-
-// Função para buscar múltiplos dados
 function allQuery(db, query, params = []) {
     return new Promise((resolve, reject) => {
         db.all(query, params, (err, rows) => {
@@ -63,11 +52,8 @@ function allQuery(db, query, params = []) {
         });
     });
 }
-
-// Criar tabelas
 async function createTables(db) {
     const tables = [
-        // Tabela de usuários
         `CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
@@ -80,8 +66,6 @@ async function createTables(db) {
             data_atualizacao DATETIME DEFAULT CURRENT_TIMESTAMP,
             ativo BOOLEAN DEFAULT 1
         )`,
-        
-        // Tabela de detalhes do jogador
         `CREATE TABLE IF NOT EXISTS player_details (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER UNIQUE NOT NULL,
@@ -92,8 +76,6 @@ async function createTables(db) {
             data_atualizacao DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
         )`,
-        
-        // Tabela de expertise do jogador
         `CREATE TABLE IF NOT EXISTS player_expertise (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER NOT NULL,
@@ -102,8 +84,6 @@ async function createTables(db) {
             FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
             UNIQUE(user_id, expertise)
         )`,
-        
-        // Tabela de jogos
         `CREATE TABLE IF NOT EXISTS games (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
@@ -123,8 +103,6 @@ async function createTables(db) {
             data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
             data_atualizacao DATETIME DEFAULT CURRENT_TIMESTAMP
         )`,
-        
-        // Tabela de reviews
         `CREATE TABLE IF NOT EXISTS reviews (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER NOT NULL,
@@ -139,8 +117,6 @@ async function createTables(db) {
             FOREIGN KEY (game_id) REFERENCES games (id) ON DELETE CASCADE,
             UNIQUE(user_id, game_id)
         )`,
-        
-        // Tabela de tokens de autenticação (para logout/blacklist)
         `CREATE TABLE IF NOT EXISTS auth_tokens (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER NOT NULL,
@@ -150,8 +126,6 @@ async function createTables(db) {
             data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
         )`,
-        
-        // Tabela de sessões de usuário
         `CREATE TABLE IF NOT EXISTS user_sessions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER NOT NULL,
@@ -164,15 +138,11 @@ async function createTables(db) {
             FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
         )`
     ];
-    
     for (const table of tables) {
         await runQuery(db, table);
     }
-    
     console.log('✅ Tabelas criadas com sucesso');
 }
-
-// Criar índices para performance
 async function createIndexes(db) {
     const indexes = [
         'CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)',
@@ -185,26 +155,18 @@ async function createIndexes(db) {
         'CREATE INDEX IF NOT EXISTS idx_auth_tokens_user_id ON auth_tokens(user_id)',
         'CREATE INDEX IF NOT EXISTS idx_user_sessions_user_id ON user_sessions(user_id)'
     ];
-    
     for (const index of indexes) {
         await runQuery(db, index);
     }
-    
     console.log('✅ Índices criados com sucesso');
 }
-
-// Inserir dados iniciais
 async function insertInitialData(db) {
-    // Verificar se já existem dados
     const userCount = await getQuery(db, 'SELECT COUNT(*) as count FROM users');
     if (userCount.count > 0) {
         console.log('📊 Dados iniciais já existem, pulando inserção');
         return;
     }
-    
     const bcrypt = require('bcryptjs');
-    
-    // Usuário padrão
     const defaultPassword = await bcrypt.hash('123456', 10);
     const userId = await runQuery(db, `
         INSERT INTO users (nome, email, senha_hash, whatsapp, sobre)
@@ -216,14 +178,10 @@ async function insertInitialData(db) {
         '+55 11 99999-1234',
         'Apaixonada por jogos indie e narrativas envolventes.'
     ]);
-    
-    // Detalhes do jogador
     await runQuery(db, `
         INSERT INTO player_details (user_id, anos_experiencia, avaliacao)
         VALUES (?, ?, ?)
     `, [userId.id, '5 anos jogando', 5.0]);
-    
-    // Expertise do jogador
     const expertises = ['RPG', 'Indie', 'Aventura', 'Narrativa'];
     for (const expertise of expertises) {
         await runQuery(db, `
@@ -231,8 +189,6 @@ async function insertInitialData(db) {
             VALUES (?, ?)
         `, [userId.id, expertise]);
     }
-    
-    // Jogos iniciais
     const games = [
         {
             nome: 'Bacuri',
@@ -268,7 +224,6 @@ async function insertInitialData(db) {
             avaliacao_media: 4.6
         }
     ];
-    
     const gameIds = [];
     for (const game of games) {
         const result = await runQuery(db, `
@@ -280,8 +235,6 @@ async function insertInitialData(db) {
         ]);
         gameIds.push(result.id);
     }
-    
-    // Review inicial
     await runQuery(db, `
         INSERT INTO reviews (user_id, game_id, estrelas, comentario)
         VALUES (?, ?, ?, ?)
@@ -291,11 +244,8 @@ async function insertInitialData(db) {
         5,
         'Incrível representação da cultura brasileira! A trilha sonora é fantástica e a história muito envolvente.'
     ]);
-    
     console.log('✅ Dados iniciais inseridos com sucesso');
 }
-
-// Função principal de inicialização
 async function initializeDatabase() {
     let db;
     try {
@@ -303,9 +253,7 @@ async function initializeDatabase() {
         await createTables(db);
         await createIndexes(db);
         await insertInitialData(db);
-        
         console.log('🎉 Banco de dados inicializado completamente!');
-        
         return db;
     } catch (error) {
         console.error('❌ Erro ao inicializar banco:', error);
@@ -316,8 +264,6 @@ async function initializeDatabase() {
         }
     }
 }
-
-// Exportar funções utilitárias
 module.exports = {
     initializeDatabase,
     connectDB,

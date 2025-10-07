@@ -89,85 +89,58 @@ const games = [
     element: null
   }
 ];
-
-// Variáveis globais
 let currentFilter = 'todos';
 let currentSort = '';
 let allGameCards = [];
-
-// Função para inicializar o sistema
 function initializeFilters() {
   mapGameElements();
-  
   const filterButtons = document.querySelectorAll('.filter-btn');
   filterButtons.forEach(button => {
     button.addEventListener('click', handleFilterClick);
   });
-  
   const sortSelect = document.getElementById('sort-select');
   if (sortSelect) {
     sortSelect.addEventListener('change', handleSortChange);
   }
-  
   console.log('Sistema de filtros inicializado!');
 }
-
-// Função para mapear elementos HTML com os dados
 function mapGameElements() {
   const gameCards = document.querySelectorAll('.game-card, .game-card1');
-  
   gameCards.forEach((card, index) => {
     if (games[index]) {
       games[index].element = card;
     }
   });
-  
   allGameCards = Array.from(gameCards);
 }
-
-// Função para lidar com cliques nos filtros
 function handleFilterClick(event) {
   const button = event.target;
   const filter = button.getAttribute('data-filter');
-  
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.remove('active');
   });
-  
   button.classList.add('active');
-  
   currentFilter = filter;
-  
   applyFilters();
-  
   console.log(`Filtro aplicado: ${filter}`);
 }
-
-// Função para lidar com mudanças na ordenação
 function handleSortChange(event) {
   currentSort = event.target.value;
   applyFilters();
   console.log(`Ordenação aplicada: ${currentSort}`);
 }
-
-// Função principal para aplicar filtros
 function applyFilters() {
   let filteredGames = [...games];
-  
   if (currentFilter !== 'todos') {
     filteredGames = filteredGames.filter(game => {
       return game.categoria.includes(currentFilter);
     });
   }
-  
   if (currentSort) {
     filteredGames = sortGames(filteredGames, currentSort);
   }
-  
   showFilteredGames(filteredGames);
 }
-
-// Função para ordenar jogos
 function sortGames(games, sortType) {
   return games.sort((a, b) => {
     switch (sortType) {
@@ -192,73 +165,54 @@ function sortGames(games, sortType) {
     }
   });
 }
-
-// Função para mostrar apenas os jogos filtrados
 function showFilteredGames(filteredGames) {
   allGameCards.forEach(card => {
     card.style.display = 'none';
     card.parentElement.style.display = 'none';
   });
-  
   filteredGames.forEach(game => {
     if (game.element) {
       game.element.style.display = 'block';
       game.element.parentElement.style.display = 'block';
     }
   });
-  
   console.log(`Mostrando ${filteredGames.length} jogos`);
 }
-
-// Função para resetar filtros
 function resetFilters() {
   currentFilter = 'todos';
   currentSort = '';
-  
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   document.querySelector('.filter-btn[data-filter="todos"]').classList.add('active');
-  
   const sortSelect = document.getElementById('sort-select');
   if (sortSelect) {
     sortSelect.value = '';
   }
-  
   applyFilters();
 }
-
-// Inicializar quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
   console.log('DOM carregado, inicializando filtros...');
   initializeFilters();
 });
-
-// Funcionalidade adicional: busca por nome
 function searchGames(searchTerm) {
   const filteredGames = games.filter(game => 
     game.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
   showFilteredGames(filteredGames);
 }
-
-// Exportar funções para uso global
 window.gameFilters = {
   reset: resetFilters,
   search: searchGames,
   applyFilters: applyFilters
 };
-
 function applyFilters() {
     const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
     const sortBy = document.getElementById('sort-select').value;
-    
     const allGameCards = document.querySelectorAll('.game-card, .game-card1');
-    
     allGameCards.forEach(card => {
         card.style.display = 'block';
     });
-    
     if (activeFilter !== 'todos') {
         allGameCards.forEach(card => {
             const categories = card.dataset.category.split(',');
@@ -267,14 +221,11 @@ function applyFilters() {
             }
         });
     }
-    
     const visibleCards = Array.from(allGameCards).filter(card => 
         card.style.display !== 'none'
     );
-    
     if (sortBy && visibleCards.length > 0) {
         visibleCards.forEach(card => card.remove());
-        
         visibleCards.sort((a, b) => {
             switch (sortBy) {
                 case 'nome':
@@ -293,12 +244,10 @@ function applyFilters() {
                     return 0;
             }
         });
-        
         const firstContainer = document.getElementById('game-list');
         visibleCards.forEach(card => {
             firstContainer.appendChild(card);
         });
-        
         document.getElementById('game-list2').innerHTML = '';
         document.getElementById('game-list3').innerHTML = '';
     }

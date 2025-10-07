@@ -1,7 +1,6 @@
-// API Simulator - Simula endpoints de uma API real
 class APISimulator {
     constructor() {
-        this.baseDelay = 500; // Simula latência de rede
+        this.baseDelay = 500;
         this.data = {
             usuarios: [
                 {
@@ -206,46 +205,33 @@ class APISimulator {
             ]
         };
     }
-
-    // Simula delay de rede
     async _simulateNetworkDelay(customDelay = null) {
         const delay = customDelay || this.baseDelay;
         return new Promise(resolve => setTimeout(resolve, delay));
     }
-
-    // Simula possíveis erros de rede
     _simulateNetworkError(errorRate = 0.05) {
         return Math.random() < errorRate;
     }
-
-    // GET /api/usuarios/:id
     async getUsuario(id) {
         await this._simulateNetworkDelay();
-        
         if (this._simulateNetworkError()) {
             throw new Error('Erro de rede: Não foi possível carregar os dados do usuário');
         }
-
         const usuario = this.data.usuarios.find(u => u.id === parseInt(id));
         if (!usuario) {
             throw new Error('Usuário não encontrado');
         }
-
         return {
             success: true,
             data: usuario,
             timestamp: new Date().toISOString()
         };
     }
-
-    // GET /api/usuarios/:id/reviews
     async getReviewsUsuario(id) {
         await this._simulateNetworkDelay();
-        
         if (this._simulateNetworkError()) {
             throw new Error('Erro de rede: Não foi possível carregar as reviews');
         }
-
         const reviews = this.data.reviews.filter(r => r.usuario_id === parseInt(id));
         const reviewsComJogos = reviews.map(review => {
             const jogo = this.data.jogos.find(j => j.id === review.jogo_id);
@@ -254,7 +240,6 @@ class APISimulator {
                 jogo: jogo ? jogo.nome : 'Jogo não encontrado'
             };
         });
-
         return {
             success: true,
             data: reviewsComJogos,
@@ -262,18 +247,12 @@ class APISimulator {
             timestamp: new Date().toISOString()
         };
     }
-
-    // GET /api/jogos
     async getJogos(filtros = {}) {
         await this._simulateNetworkDelay();
-        
         if (this._simulateNetworkError()) {
             throw new Error('Erro de rede: Não foi possível carregar os jogos');
         }
-
         let jogos = [...this.data.jogos];
-
-        // Aplicar filtros
         if (filtros.categoria) {
             jogos = jogos.filter(j => j.categoria.toLowerCase().includes(filtros.categoria.toLowerCase()));
         }
@@ -290,8 +269,6 @@ class APISimulator {
                 j.tags.some(tag => tag.toLowerCase().includes(filtros.busca.toLowerCase()))
             );
         }
-
-        // Ordenação
         if (filtros.ordenar) {
             switch (filtros.ordenar) {
                 case 'preco_asc':
@@ -311,15 +288,11 @@ class APISimulator {
                     break;
             }
         }
-
-        // Paginação
         const limite = parseInt(filtros.limite) || 10;
         const pagina = parseInt(filtros.pagina) || 1;
         const inicio = (pagina - 1) * limite;
         const fim = inicio + limite;
-        
         const jogosPaginados = jogos.slice(inicio, fim);
-
         return {
             success: true,
             data: jogosPaginados,
@@ -333,21 +306,15 @@ class APISimulator {
             timestamp: new Date().toISOString()
         };
     }
-
-    // GET /api/jogos/:id
     async getJogo(id) {
         await this._simulateNetworkDelay();
-        
         if (this._simulateNetworkError()) {
             throw new Error('Erro de rede: Não foi possível carregar o jogo');
         }
-
         const jogo = this.data.jogos.find(j => j.id === parseInt(id));
         if (!jogo) {
             throw new Error('Jogo não encontrado');
         }
-
-        // Buscar reviews do jogo
         const reviews = this.data.reviews.filter(r => r.jogo_id === parseInt(id));
         const reviewsComUsuarios = reviews.map(review => {
             const usuario = this.data.usuarios.find(u => u.id === review.usuario_id);
@@ -356,7 +323,6 @@ class APISimulator {
                 usuario: usuario ? usuario.nome : 'Usuário não encontrado'
             };
         });
-
         return {
             success: true,
             data: {
@@ -366,27 +332,20 @@ class APISimulator {
             timestamp: new Date().toISOString()
         };
     }
-
-    // POST /api/usuarios/:id
     async atualizarUsuario(id, dadosAtualizados) {
-        await this._simulateNetworkDelay(800); // Operações de escrita são mais lentas
-        
-        if (this._simulateNetworkError(0.02)) { // Menor chance de erro em operações críticas
+        await this._simulateNetworkDelay(800);
+        if (this._simulateNetworkError(0.02)) {
             throw new Error('Erro de rede: Não foi possível salvar os dados');
         }
-
         const usuarioIndex = this.data.usuarios.findIndex(u => u.id === parseInt(id));
         if (usuarioIndex === -1) {
             throw new Error('Usuário não encontrado');
         }
-
-        // Atualizar dados
         this.data.usuarios[usuarioIndex] = {
             ...this.data.usuarios[usuarioIndex],
             ...dadosAtualizados,
-            id: parseInt(id) // Garantir que o ID não seja alterado
+            id: parseInt(id)
         };
-
         return {
             success: true,
             data: this.data.usuarios[usuarioIndex],
@@ -394,15 +353,11 @@ class APISimulator {
             timestamp: new Date().toISOString()
         };
     }
-
-    // POST /api/reviews
     async criarReview(dadosReview) {
         await this._simulateNetworkDelay(600);
-        
         if (this._simulateNetworkError(0.03)) {
             throw new Error('Erro de rede: Não foi possível salvar a review');
         }
-
         const novaReview = {
             id: this.data.reviews.length + 1,
             ...dadosReview,
@@ -410,9 +365,7 @@ class APISimulator {
             curtidas: 0,
             util: 0
         };
-
         this.data.reviews.push(novaReview);
-
         return {
             success: true,
             data: novaReview,
@@ -420,14 +373,9 @@ class APISimulator {
             timestamp: new Date().toISOString()
         };
     }
-
-    // Método para resetar dados (útil para testes)
     resetData() {
-        // Recarregar dados originais se necessário
         console.log('Dados da API simulada resetados');
     }
-
-    // Método para obter estatísticas da API
     getStats() {
         return {
             total_usuarios: this.data.usuarios.length,
@@ -437,11 +385,7 @@ class APISimulator {
         };
     }
 }
-
-// Instância global da API simulada
 window.apiSimulator = new APISimulator();
-
-// Exportar para uso em módulos
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = APISimulator;
 }

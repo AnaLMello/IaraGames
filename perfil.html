@@ -13,14 +13,12 @@
             color: white;
             font-family: 'Inria Sans', sans-serif;
         }
-        
         .profile-header {
             background: transparent;
             padding: 40px 0;
             margin-bottom: 30px;
             border-bottom: none;
         }
-        
         .profile-avatar-large {
             color: #63c9bb;
             background: transparent;
@@ -28,20 +26,17 @@
             padding: 15px;
             border: none;
         }
-        
         .profile-avatar-container {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
         .profile-name-highlight {
             color: #63c9bb !important;
             font-weight: bold;
             font-size: 2.5rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
         .profile-avatar-large {
             width: 120px;
             height: 120px;
@@ -49,7 +44,6 @@
             border: 4px solid white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        
         .profile-card {
             background: #1a2332;
             border: 1px solid #468E89;
@@ -57,23 +51,19 @@
             padding: 20px;
             margin: 20px;
         }
-        
         .profile-card h5 {
             color: #ffffff;
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 15px;
         }
-        
         .profile-card ul {
             margin: 0;
             padding: 0;
         }
-        
         .profile-card li {
             margin-bottom: 4px;
         }
-        
         .profile-card a {
             display: flex;
             align-items: center;
@@ -84,41 +74,34 @@
             transition: all 0.3s ease;
             font-size: 16px;
         }
-        
         .profile-card a:hover {
             background-color: rgba(99, 201, 187, 0.1);
             color: #ffffff;
         }
-        
         .profile-card a span {
             margin-right: 8px;
             font-size: 14px;
         }
-        
         .profile-card a svg {
             margin-right: 8px;
             width: 16px;
             height: 16px;
         }
-        
         .profile-form .form-control {
             background: #2a2a2a;
             border: 1px solid #444;
             color: white !important;
             border-radius: 8px;
         }
-        
         .profile-form .form-control::placeholder {
             color: rgba(255, 255, 255, 0.6) !important;
         }
-        
         .profile-form .form-control:focus {
             background: #2a2a2a;
             border-color: #63C9BB;
             color: white !important;
             box-shadow: 0 0 0 0.2rem rgba(99, 201, 187, 0.25);
         }
-        
         .btn-save {
             background: #00ff88;
             color: black;
@@ -127,12 +110,10 @@
             border-radius: 8px;
             font-weight: bold;
         }
-        
         .btn-save:hover {
             background: #00cc6a;
             color: black;
         }
-        
         .expertise-tag {
             display: inline-block;
             background: #0f766e;
@@ -141,7 +122,6 @@
             margin: 4px;
             font-size: 14px;
         }
-        
         .stats-card {
             background: #63C9BB;
             color: black;
@@ -149,24 +129,20 @@
             padding: 1.5rem;
             text-align: center;
         }
-        
         .review-item {
             background: #2a2a2a;
             border-radius: 8px;
             padding: 1rem;
             margin-bottom: 1rem;
         }
-        
         .stars {
             color: #ffd700;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg mt-3 ms-5 me-md-5">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <!-- Logo -->
             <div class="d-flex align-items-center">
                 <img src="./img/IaraLogo.png" alt="Logo" class="me-2 logo-topo" style="height: 80px;">
                 <div class="logo-text d-flex flex-column text-white">
@@ -174,27 +150,31 @@
                     <span style="font-size: 27px;" class="fw-bold">Games</span>
                 </div>
             </div>
-
-            <!-- Menu -->
             <div class="d-flex align-items-center gap-4">
                 <ul class="navbar-nav d-flex flex-row align-items-center gap-4">
                     <li class="nav-item"><a class="nav-link text-white" href="index.html">HOME</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">COMUNIDADE</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">JOGOS</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">ACESSIBILIDADE</a></li>
-                    <li class="nav-item">
-                        <div class="carrinho-container">
+                    <li style="font-size: 21px;" class="nav-item"><a class="nav-link text-white" href="#">ACESSIBILIDADE</a></li>
+        <li class="nav-item">
+            <div class="search-icon-container">
+                <svg class="search-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="carrinho-container">
                 <svg class="carrinho-icone" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                     <path d="M7 18C5.9 18 5 18.9 5 20S5.9 22 7 22 9 21.1 9 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.24 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2M17 18C15.9 18 15 18.9 15 20S15.9 22 17 22 19 21.1 19 20 18.1 18 17 18Z"/>
                 </svg>
             </div>
-                    </li>
+        </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-    <!-- Profile Header -->
     <div class="profile-header">
         <div class="container">
             <div class="row align-items-center">
@@ -212,10 +192,8 @@
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="row">
-            <!-- Sidebar -->
             <div class="col-md-3">
                 <div class="profile-card">
                     <h5 class="mb-3">Menu do Perfil</h5>
@@ -246,11 +224,8 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Main Content -->
             <div class="col-md-9">
                 <div class="row">
-                    <!-- Profile Form -->
                     <div class="col-lg-8">
                         <div class="profile-card">
                             <h3 class="mb-4">Informações Pessoais</h3>
@@ -280,12 +255,9 @@
                             </form>
                         </div>
                     </div>
-
-                    <!-- Stats Card -->
                     <div class="col-lg-4">
                         <div class="stats-card mb-4">
                             <h4 class="mb-3">Detalhes do Jogador</h4>
-                            
                             <div class="mb-3">
                                 <h6>Expertise</h6>
                                 <div id="expertiseTags">
@@ -295,12 +267,10 @@
                                     <span class="expertise-tag">Narrativa</span>
                                 </div>
                             </div>
-                            
                             <div class="mb-3">
                                 <h6>Experiência</h6>
                                 <p id="experiencia" class="mb-0">5 anos jogando</p>
                             </div>
-                            
                             <div class="mb-3">
                                 <h6>Avaliação</h6>
                                 <p id="avaliacao" class="mb-0">
@@ -308,8 +278,6 @@
                                 </p>
                             </div>
                         </div>
-
-                        <!-- Reviews -->
                         <div class="profile-card">
                             <h5 class="mb-3">Reviews Recentes</h5>
                             <div id="reviewsList">
@@ -328,67 +296,71 @@
             </div>
         </div>
     </div>
-
+    <div id="searchModal" class="search-modal">
+      <div class="search-modal-content">
+        <div class="search-modal-header">
+          <h3 class="search-modal-title">Buscar Jogos</h3>
+          <button class="search-modal-close" id="closeSearchModal">&times;</button>
+        </div>
+        <input 
+          type="text" 
+          class="search-modal-input" 
+          id="searchInput" 
+          placeholder="Digite o nome do jogo que você está procurando..."
+          autocomplete="off"
+        >
+        <div class="search-results" id="searchResults">
+          <div class="search-no-results">Digite algo para começar a buscar...</div>
+        </div>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="api-simulator.js"></script>
     <script src="data-service.js"></script>
     <script src="profile-component.js"></script>
+    <script src="search-modal.js"></script>
     <script>
         // Carregar dados do perfil
         async function carregarDadosPerfil() {
             try {
                 mostrarCarregamento(true);
-                
                 const response = await window.dataService.carregarUsuario();
-                
                 if (response.success && response.data) {
                     const usuario = response.data;
-                    
                     document.getElementById('nome').value = usuario.nome || '';
                     document.getElementById('email').value = usuario.email || '';
                     document.getElementById('whatsapp').value = usuario.whatsapp || '';
                     document.getElementById('sobre').value = usuario.sobre || '';
-                    
                     document.getElementById('profileHeaderName').textContent = usuario.nome || 'Usuário';
                     document.getElementById('profileHeaderEmail').textContent = usuario.email || '';
-                    
                     if (response.source === 'localStorage') {
                         mostrarMensagem('Dados carregados do cache local.', 'info');
                     }
-                    
                     await carregarReviewsRecentes();
-                    
                 } else {
                     throw new Error(response.error || 'Erro ao carregar dados');
                 }
-                
             } catch (error) {
                 console.error('Erro ao carregar perfil:', error);
-                
                 document.getElementById('nome').value = 'Ana Silva';
                 document.getElementById('email').value = 'ana.silva@email.com';
                 document.getElementById('whatsapp').value = '+55 11 99999-1234';
                 document.getElementById('sobre').value = 'Apaixonada por jogos indie e narrativas envolventes.';
-                
                 document.getElementById('profileHeaderName').textContent = 'Ana Silva';
                 document.getElementById('profileHeaderEmail').textContent = 'ana.silva@email.com';
-                
                 mostrarMensagem('Erro ao carregar alguns dados. Usando informações em cache.', 'warning');
             } finally {
                 mostrarCarregamento(false);
             }
         }
-        
         // Carregar reviews recentes
         async function carregarReviewsRecentes() {
             try {
                 const response = await window.dataService.carregarReviewsUsuario();
-                
                 if (response.success && response.data.length > 0) {
                     const reviewsContainer = document.querySelector('.reviews-recentes .row');
                     if (reviewsContainer) {
                         const review = response.data[0];
-                        
                         reviewsContainer.innerHTML = `
                             <div class="col-12">
                                 <div class="review-item">
@@ -411,24 +383,20 @@
                 console.error('Erro ao carregar reviews:', error);
             }
         }
-        
         // Função auxiliar para calcular tempo decorrido
         function calcularTempoDecorrido(dataReview) {
             const hoje = new Date();
             const dataReviewObj = new Date(dataReview);
             const diffTime = Math.abs(hoje - dataReviewObj);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
             if (diffDays === 1) return '1 dia';
             if (diffDays < 7) return `${diffDays} dias`;
             if (diffDays < 30) return `${Math.floor(diffDays / 7)} semana${Math.floor(diffDays / 7) > 1 ? 's' : ''}`;
             return `${Math.floor(diffDays / 30)} mês${Math.floor(diffDays / 30) > 1 ? 'es' : ''}`;
         }
-        
         // Função para mostrar/esconder indicador de carregamento
         function mostrarCarregamento(mostrar) {
             let loadingElement = document.getElementById('loadingIndicator');
-            
             if (mostrar && !loadingElement) {
                 loadingElement = document.createElement('div');
                 loadingElement.id = 'loadingIndicator';
@@ -448,7 +416,6 @@
                 loadingElement.remove();
             }
         }
-        
         // Função para mostrar mensagens
         function mostrarMensagem(texto, tipo = 'info') {
             const alertDiv = document.createElement('div');
@@ -460,40 +427,32 @@
                 ${texto}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
-            
             document.body.appendChild(alertDiv);
-            
             setTimeout(() => {
                 if (alertDiv.parentNode) {
                     alertDiv.remove();
                 }
             }, 5000);
         }
-        
         // Salvar perfil
         async function salvarPerfil() {
             try {
                 mostrarCarregamento(true);
-                
                 const dados = {
                     nome: document.getElementById('nome').value,
                     email: document.getElementById('email').value,
                     whatsapp: document.getElementById('whatsapp').value,
                     sobre: document.getElementById('sobre').value
                 };
-                
                 const response = await window.dataService.atualizarUsuario(dados);
-                
                 if (response.success) {
                     if (window.profileComponent) {
                         window.profileComponent.updateUserData(dados);
                     }
-                    
                     mostrarMensagem('Perfil atualizado com sucesso!', 'success');
                 } else {
                     throw new Error(response.error || 'Erro ao salvar perfil');
                 }
-                
             } catch (error) {
                 console.error('Erro ao salvar perfil:', error);
                 mostrarMensagem('Erro ao salvar perfil. Tente novamente.', 'danger');
@@ -501,7 +460,6 @@
                 mostrarCarregamento(false);
             }
         }
-        
         document.addEventListener('DOMContentLoaded', () => {
             carregarDadosPerfil();
         });
